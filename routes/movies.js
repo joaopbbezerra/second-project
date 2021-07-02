@@ -14,9 +14,27 @@ const imdb = require('imdb-api')
 //     }
 // }
 
-router.get("/movies-list", async (req, res)=>{ //connecting api
-    let test = await imdb.search({name: 'The Toxic Avenger'}, {apiKey: '94f5077f', timeout: 30000})    
-    res.render("movie/movies-list", {test})
+
+
+router.get("/movies-search", async (req, res)=>{
+    const {title} = req.query
+    console.log("title",title)
+    const searchResult = await imdb.search({name: title}, {apiKey: '94f5077f', timeout: 30000})
+    res.render("movie/movies-search", {searchResult})
 })
+
+router.post("/movies-search", async (req, res)=>{
+    const {title} = req.body
+    console.log("title post",title)
+    const searchResult =  await imdb.search({name: title}, {apiKey: process.env.imdbKey, timeout: 30000})    
+    console.log(searchResult)
+    res.render("movie/movies-search", {searchResult})
+})
+
+router.get("/movies-list", (req, res)=>{ //connecting api
+    res.render("movie/movies-list")
+})
+
+
 
 module.exports = router;
