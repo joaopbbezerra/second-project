@@ -10,7 +10,22 @@
    </head>
 
    <body>
+    {{#if loggedInUser}}
+      <div>
+          Welcome, {{loggedInUser}}
+          <a href="/movies-search">Search Movies</a>
+          <a href="/auth/{{loggedId}}">My User</a>
+          <form action="/logout" method="POST">
+            <button type="submit">Logout</button>
+          </form>
+      </div>
 
+      {{else}}
+         <a href="/signup">Sign up</a>
+         <a href="/login">Login</a>
+         <a href="/main">Main</a>
+         <a href="/movies-search">Search Movies</a>
+      {{/if}}
       {{{body}}}
 
       <script src="/js/script.js"></script>

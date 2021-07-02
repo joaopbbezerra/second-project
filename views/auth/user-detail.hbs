@@ -1,0 +1,19 @@
+<h1>
+    Welcome, {{userDetail.username}}
+</h1>
+
+<img src="{{userDetail.image}}" alt="">
+
+<p>Wanna have some matches? </p>
+
+<form action="/{{userDetail._id}}" method="POST">
+
+    <label for="">Date</label>
+    <input type="text" name="date" value={{userDetail.date}}>
+
+    <button type="submit">Update</button>
+</form>
+
+{{#if errorMessage}}
+    <p>{{errorMessage}}</p>
+{{/if}}

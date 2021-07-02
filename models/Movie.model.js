@@ -7,4 +7,4 @@ const MovieSchema = new Schema ({
     rating: Number,
 })
 
-module.exports = model ("Movie", MovieSchema)
+module.exports = model ("MoviesList", MovieSchema)
