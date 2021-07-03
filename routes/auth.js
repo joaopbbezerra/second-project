@@ -3,6 +3,8 @@ const router = express.Router();
 const User = require("../models/User.model");
 const Movies = require("../models/Movie.model");
 const bcrypt = require("bcryptjs");
+// const fileUpload = require("../config/cloudinary");
+const imdb = require('imdb-api')
 
 function requireLogin(req, res, next){
     if (req.session.currentUser){
@@ -19,10 +21,24 @@ router.get("/signup", (req, res)=>{
 
 router.post("/signup", async (req, res)=>{
     const {username, image, password} = req.body
+    
+    if (username === "" || password === "") {
+        res.render("auth/signup", { errorMessage: "Fill username and password" });
+        return;
+      }
+
+    const user = await User.findOne({ username: username }); //Lembrar de colocar o await sempre que chamar o mongodb
+    if (user !== null) {
+      res.render("auth/signup", {
+        errorMessage: `${username} already exists. Pick another one`,
+      });
+      return;
+    }
+    
     const saltRounds = 10;
     const salt = bcrypt.genSaltSync(saltRounds);
     const hashedPassword = bcrypt.hashSync(password, salt);
-    await User.create({username, image, password:hashedPassword})
+    await User.create({username, image:image, password:hashedPassword})
 
     res.redirect("/")
 })
@@ -70,7 +86,14 @@ router.post("/logout", (req, res)=>{
 
 router.get("/auth/:userId", async (req, res)=>{
     const userDetail = await User.findById(req.params.userId)
-    res.render("auth/user-detail", {userDetail})
+    // console.log("Favorites:", req.session.currentUser.favorites[3])
+    const newArray = []
+    for (let i = 0; i<userDetail.favorites.length; i++){
+        const movieDetails =  await imdb.get({id: userDetail.favorites[i]}, {apiKey: process.env.imdbKey, timeout: 30000})
+        newArray.push(movieDetails)
+    }
+    console.log(newArray)
+    res.render("auth/user-detail", {userDetail, newArray})
 })
 
 router.post("/auth/:userId", async (req, res) =>{ //Código rodado depois de clicar no botão do form no user details
@@ -91,17 +114,23 @@ router.post("/auth/:userId", async (req, res) =>{ //Código rodado depois de cli
 })
 
 router.get("/favorites/:userId", async (req, res)=>{
-    const favoritesDetails = await User.findById(req.params.userId)
+    const userDetail = await User.findById(req.params.userId)
+    // console.log("Favorites:", req.session.currentUser.favorites[3])
+    const newArray = []
+    for (let i = 0; i<userDetail.favorites.length; i++){
+        const movieDetails =  await imdb.get({id: userDetail.favorites[i]}, {apiKey: process.env.imdbKey, timeout: 30000})
+        newArray.push(movieDetails)
+    }
     res.render("auth/favorites-details", {favoritesDetails})
 })
 
-router.post("/favorites/:userId", async (req, res) =>{
-    const {favorites} = req.body
-    await User.findByIdAndUpdate(req.params.userId, {
-        favorites: favorites
-    });
-    res.redirect(`/favorites/${req.params.userId}`)
-})
+// router.post("/favorites/:userId", async (req, res) =>{
+//     const {favorites} = req.body
+//     await User.findByIdAndUpdate(req.params.userId, {
+//         favorites: favorites
+//     });
+//     res.redirect(`/favorites/${req.params.userId}`)
+// })
 
 // router.post("/favorites/:userId/add", async (req, res)=>{
 //     const {favorites} = req.body
@@ -113,6 +142,7 @@ router.post("/favorites/:userId", async (req, res) =>{
 //     res.redirect(`/favorites/${req.session.currentUser._id}`)
 // })
 
+router.post("/matches", async (req, res)=>{
 
-
+})
 module.exports = router;

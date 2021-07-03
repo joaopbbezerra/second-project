@@ -19,7 +19,7 @@ const imdb = require('imdb-api')
 router.get("/movies-search", async (req, res)=>{
     const {title} = req.query
     // console.log("title",title)
-    const searchResult = await imdb.search({name: title}, {apiKey: '94f5077f', timeout: 30000})
+    const searchResult = await imdb.search({name: title}, {apiKey: process.env.imdbKey, timeout: 30000})
     res.render("movie/movies-search", {searchResult})
 })
 
@@ -50,11 +50,10 @@ router.post("/movies-details/:movieImdbid", async (req, res)=>{
 })
 
 router.post("/favorites/:moviesId/add", async (req, res)=>{
-    console.log("moviesId", req.params.moviesId)
     await User.findByIdAndUpdate(req.session.currentUser._id, {
         $push: {favorites: req.params.moviesId}
     })
-    res.redirect(`/favorites/${req.session.currentUser._id}`)
+    res.redirect(`/movies-details/${req.params.moviesId}`)
 })
 
 
