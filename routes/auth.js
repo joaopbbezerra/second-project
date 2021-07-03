@@ -103,15 +103,15 @@ router.post("/favorites/:userId", async (req, res) =>{
     res.redirect(`/favorites/${req.params.userId}`)
 })
 
-router.post("/favorites/:userId/add", async (req, res)=>{
-    const {favorites} = req.body
-    console.log(favorites)
-    await User.findByIdAndUpdate(req.params.userId, {
-        $push: {favorites: favorites}
-    })
-    console.log(req.params.userId)
-    res.redirect(`/favorites/${req.session.currentUser._id}`)
-})
+// router.post("/favorites/:userId/add", async (req, res)=>{
+//     const {favorites} = req.body
+//     console.log(favorites)
+//     await User.findByIdAndUpdate(req.params.userId, {
+//         $push: {favorites: favorites}
+//     })
+//     console.log(req.params.userId)
+//     res.redirect(`/favorites/${req.session.currentUser._id}`)
+// })
 
 
 

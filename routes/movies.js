@@ -49,6 +49,13 @@ router.post("/movies-details/:movieImdbid", async (req, res)=>{
     res.redirect("/movie/movies-details")
 })
 
+router.post("/favorites/:moviesId/add", async (req, res)=>{
+    console.log("moviesId", req.params.moviesId)
+    await User.findByIdAndUpdate(req.session.currentUser._id, {
+        $push: {favorites: req.params.moviesId}
+    })
+    res.redirect(`/favorites/${req.session.currentUser._id}`)
+})
 
 
 

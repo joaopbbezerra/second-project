@@ -24,8 +24,7 @@
             </ul>
             <a href="/movies-search">Search Movies</a>
         </div>
-            <form action="/favorites/{{userDetail._id}}/add" method="POST">
-            <input type="" name="favorite" value={{movieDetails.imdbid}}>
+            <form action="/favorites/{{movieDetails.imdbid}}/add" method="POST">
                <button type="submit">Favorite</button>
             </form>
     </div>
