@@ -27,7 +27,7 @@ router.post("/movies-search", async (req, res)=>{
     const {title} = req.body //Pegando do form
     // console.log("title post",title)
     const searchResult =  await imdb.search({name: title}, {apiKey: process.env.imdbKey, timeout: 30000})     //Usando o título pra pesquisar na API (método de pesquisa pré feito)
-    console.log(searchResult)
+    // console.log(searchResult)
     res.render("movie/movies-search", {searchResult}) //devolve o searchResult (lista de resultados)
 })
 
@@ -39,21 +39,51 @@ router.get("/movies-details/:movieImdbid", async (req, res)=>{
     const movieDetails =  await imdb.get({id: req.params.movieImdbid}, {apiKey: process.env.imdbKey, timeout: 30000})
     const userDetail = req.session.currentUser
     // res.render("albums", {albums: albumResult.body.items})
-    console.log(movieDetails)
+    // console.log(movieDetails)
     res.render("movie/movies-details", {movieDetails, userDetail})
 })
 
 router.post("/movies-details/:movieImdbid", async (req, res)=>{
     const movieId = req.params.movieImdbid
-    console.log(movieDetails)
+    // console.log(movieDetails)
     res.redirect("/movie/movies-details")
 })
 
 router.post("/favorites/:moviesId/add", async (req, res)=>{
-    await User.findByIdAndUpdate(req.session.currentUser._id, {
-        $push: {favorites: req.params.moviesId}
-    })
+try{
+    // console.log("favorites", req.session.currentUser.favorites)
+    // console.log("movie id", req.params.moviesId)
+    
+    let counterSameMovies = 0
+    for (let i = 0; i<req.session.currentUser.favorites.length; i++){
+        console.log(req.session.currentUser.favorites[i])
+        if (req.session.currentUser.favorites[i]===req.params.moviesId){
+            counterSameMovies++
+        }
+    }
+    if (counterSameMovies === 0){
+        await User.findByIdAndUpdate(req.session.currentUser._id, {
+            $push: {favorites: req.params.moviesId}
+        })
+        console.log("The movies was pushed ", req.params.moviesId)
+    } else {
+        console.log("No movies were pushed")
+    }
+    //Achando o primeiro usuário
+    let userNow = await User.findById(req.session.currentUser._id);
+    console.log("First user: ", userNow.date)
+    //Achando o segundo usuário a partir do primeiro
+    let userOneDate = await User.find({username: userNow.date})
+    console.log("Second user: ",userOneDate.date)
+    //For pra checar o match
+
+
     res.redirect(`/movies-details/${req.params.moviesId}`)
+} catch(e){
+    req.session.destroy()
+    res.redirect("/login")
+    console.log(e)
+}
 })
 
 

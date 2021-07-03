@@ -17,7 +17,10 @@ const userSchema = new Schema({
     default:"https://media.giphy.com/media/1431E7VsLJxfqg/giphy.gif"
   },
   favorites: Array,
-  date: String
+  date: [{
+    username: String,
+    id: String
+  }]
 });
 
 const User = model("User", userSchema);
