@@ -24,8 +24,11 @@
             </ul>
             <a href="/movies-search">Search Movies</a>
         </div>
+
+            {{#if loggedInUser}}
             <form action="/favorites/{{movieDetails.imdbid}}/add" method="POST">
                <button type="submit">Favorite</button>
             </form>
+            {{/if}}
     </div>
 </div>

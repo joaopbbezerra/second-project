@@ -107,7 +107,7 @@ router.post("/auth/:userId", async (req, res) =>{ //Código rodado depois de cli
         await User.findByIdAndUpdate(req.params.userId, {
             date
         });
-        res.redirect(`/${req.params.userId}`); //atualizar a página
+        res.redirect(`/auth/${req.params.userId}`); //atualizar a página
     } else {
         res.render("auth/user-detail", {userDetail, errorMessage: "Date is not valid, try another one"})
     }   
@@ -121,7 +121,7 @@ router.get("/favorites/:userId", async (req, res)=>{
         const movieDetails =  await imdb.get({id: userDetail.favorites[i]}, {apiKey: process.env.imdbKey, timeout: 30000})
         newArray.push(movieDetails)
     }
-    res.render("auth/favorites-details", {favoritesDetails})
+    res.render("auth/favorites-details", {userDetail, newArray})
 })
 
 // router.post("/favorites/:userId", async (req, res) =>{

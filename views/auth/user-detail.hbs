@@ -6,7 +6,7 @@
 
 <p>Wanna have some matches? </p>
 
-<form action="/{{userDetail._id}}" method="POST">
+<form action="/auth/{{userDetail._id}}" method="POST">
 
     <label for="">Date</label>
     <input type="text" name="date" value={{userDetail.date}}>
@@ -16,13 +16,7 @@
 <h2>
 
 </h2>
-{{#if newArray}}
-{{#each newArray}}
-<p>Título: {{title}}</p>
-<img src="{{poster}}" alt="">
 
-{{/each}}
-{{/if}}
 {{#if errorMessage}}
     <p>{{errorMessage}}</p>
 {{/if}}
