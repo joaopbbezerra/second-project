@@ -16,10 +16,7 @@ const userSchema = new Schema({
     type:String,
     default:"https://media.giphy.com/media/1431E7VsLJxfqg/giphy.gif"
   },
-  favorites: [{
-    type: Schema.Types.ObjectId,
-    ref: "MoviesList"
-  }],
+  favorites: Array,
   date: String
 });
 

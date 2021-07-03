@@ -37,10 +37,19 @@ router.post("/movies-search", async (req, res)=>{
 
 router.get("/movies-details/:movieImdbid", async (req, res)=>{
     const movieDetails =  await imdb.get({id: req.params.movieImdbid}, {apiKey: process.env.imdbKey, timeout: 30000})
+    const userDetail = req.session.currentUser
     // res.render("albums", {albums: albumResult.body.items})
     console.log(movieDetails)
-    res.render("movie/movies-details", {movieDetails})
+    res.render("movie/movies-details", {movieDetails, userDetail})
 })
+
+router.post("/movies-details/:movieImdbid", async (req, res)=>{
+    const movieId = req.params.movieImdbid
+    console.log(movieDetails)
+    res.redirect("/movie/movies-details")
+})
+
+
 
 
 module.exports = router;

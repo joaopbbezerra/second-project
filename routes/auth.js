@@ -90,6 +90,29 @@ router.post("/auth/:userId", async (req, res) =>{ //Código rodado depois de cli
     }   
 })
 
+router.get("/favorites/:userId", async (req, res)=>{
+    const favoritesDetails = await User.findById(req.params.userId)
+    res.render("auth/favorites-details", {favoritesDetails})
+})
+
+router.post("/favorites/:userId", async (req, res) =>{
+    const {favorites} = req.body
+    await User.findByIdAndUpdate(req.params.userId, {
+        favorites: favorites
+    });
+    res.redirect(`/favorites/${req.params.userId}`)
+})
+
+router.post("/favorites/:userId/add", async (req, res)=>{
+    const {favorites} = req.body
+    console.log(favorites)
+    await User.findByIdAndUpdate(req.params.userId, {
+        $push: {favorites: favorites}
+    })
+    console.log(req.params.userId)
+    res.redirect(`/favorites/${req.session.currentUser._id}`)
+})
+
 
 
 module.exports = router;

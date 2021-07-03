@@ -18,8 +18,15 @@
                 <li>
                     Plot: {{movieDetails.plot}}
                 </li>
+                <li>
+                    Id: {{movieDetails.imdbid}}
+                </li>
             </ul>
             <a href="/movies-search">Search Movies</a>
         </div>
+            <form action="/favorites/{{userDetail._id}}/add" method="POST">
+            <input type="" name="favorite" value={{movieDetails.imdbid}}>
+               <button type="submit">Favorite</button>
+            </form>
     </div>
 </div>
