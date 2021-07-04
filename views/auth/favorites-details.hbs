@@ -6,8 +6,9 @@
     {{#each newArray}}
         <p>Título: {{title}}</p>
         <img src="{{poster}}" alt="">
-        <form action="/movies-details/{{imdbid}}/delete" method="POST">
+        <a href="/favorites-details/{{imdbid}}">View Details</a>
+        {{!-- <form action="/movies-details/{{imdbid}}/delete" method="POST">
            <button type="submit">Delete</button>
-        </form>
+        </form> --}}
     {{/each}}
 {{/if}}

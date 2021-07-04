@@ -133,19 +133,46 @@ try{
 }
 })
 
-router.post("/movies-details/:movieImdbid/delete", async (req, res) => {
-    try{
-        await User.findByIdAndUpdate(req.session.currentUser._id,{
-            $pull: {favorites: req.params.moviesImdbid}
-        });
-        res.redirect("/movie/movies-details");
-    } catch (e){
-        req.session.destroy()
-        res.redirect("/login")
-        console.log(e)
-    }
+//DELETE
+// router.post("/movies-details/:movieImdbid/delete", async (req, res) => {
+//     try{
+//         await User.findByIdAndUpdate(req.session.currentUser._id,{
+//             $pull: {favorites: req.params.moviesImdbid}
+//         });
+//         res.redirect("/movie/movies-details");
+//     } catch (e){
+//         req.session.destroy()
+//         res.redirect("/login")
+//         console.log(e)
+//     }
+//   });
 
-    
-  });
+// router.get("/favorites-details/:moviesId", async (req, res) => {
+    // const movieDetails =  await imdb.get({id: req.params.movieImdbid}, {apiKey: process.env.imdbKey, timeout: 30000})
+    // const userDetail = req.session.currentUser
+//     res.render("movie/movies-favorites-details", {movieDetails, userDetail})
+// })
+
+router.get("/favorites-details/:movieImdbid", async (req, res)=>{
+    const movieDetails =  await imdb.get({id: req.params.movieImdbid}, {apiKey: process.env.imdbKey, timeout: 30000})
+    const userDetail = req.session.currentUser
+    res.render("movie/movies-favorites-details", {movieDetails, userDetail})
+})
+
+router.post("/favorites-details/:movieImdbid/delete", async (req, res)=>{
+    console.log("Botão clicado")
+    const userDetail = req.session.currentUser
+    for (let i=0; i<userDetail.favorites.length; i++){
+        console.log("Checando se entrou no for pra testar se o filme tá nos favoritos do date: ", userDetail.favorites[i])
+        if (req.params.movieImdbid === userDetail.favorites[i]){
+            console.log("Achou igual")
+            //Usuário logado
+            await User.findByIdAndUpdate(req.session.currentUser._id, {
+                $pull: {favorites: req.params.movieImdbid}
+            })
+        }
+    }
+    res.redirect(`/favorites/${userDetail._id}`);
+})
 
 module.exports = router;

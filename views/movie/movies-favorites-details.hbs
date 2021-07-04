@@ -1,1 +1,41 @@
-<h1>test</h1>
+<h1>Movies Details</h1>
+<div class="row">
+<div class="col-md-4">
+    <div class="card cards-flex">
+        <img class="card-img-top" src="{{movieDetails.poster}}" alt="{{movieDetails.title}}" />
+        <div class="card-body">
+            <h5 class="card-title">{{movieDetails.title}}</h5>
+            <ul>
+                <li>
+                    Year: {{movieDetails.year}}
+                </li>
+                <li>
+                    Runtime: {{movieDetails.runtime}}
+                </li>
+                <li>
+                    Rating: {{movieDetails.rating}}/10
+                </li>
+                <li>
+                    Plot: {{movieDetails.plot}}
+                </li>
+                <li>
+                    Id: {{movieDetails.imdbid}}
+                </li>
+            </ul>
+            <a href="/movies-search">Search Movies</a>
+        </div>
+
+            {{#if loggedInUser}}
+            {{!-- Favoritar --}}
+            <form action="/favorites/{{movieDetails.imdbid}}/add" method="POST">
+               <button type="submit">Favorite</button>
+            </form>
+            
+            {{!-- Deletar --}}
+            <form action="/favorites-details/{{movieDetails.imdbid}}/delete" method="POST">
+                <button type="submit">Delete</button>
+            </form>
+            
+            {{/if}}
+    </div>
+</div>
