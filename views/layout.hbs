@@ -24,10 +24,10 @@
 			<a class="navbar-brand" href="/">Matchflix</a> <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav ml-auto">
-          <!-- <input class="form-control me-2" type="search" placeholder="Search for a Movie" aria-label="Search">
-          <button class="btn btn-danger" type="submit">Search</button> -->
+               {{!-- SEARCH BAR --}}
+                     
                   {{#if loggedInUser}}
-
+               
                      <li class="nav-item">
 						      <a class="nav-link" href="/movies-search">Search Movies</a>
 					      </li>
@@ -44,6 +44,7 @@
 					      {{!-- <li class="nav-item">
 						      <a class="nav-link" href="/signup">SignUp</a>
 					      </li> --}}
+                     
 					      <li class="nav-item">
 						      <a class="nav-link" href="/login">Login/Signup</a>
 					      </li>

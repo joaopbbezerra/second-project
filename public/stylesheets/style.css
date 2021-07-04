@@ -2,6 +2,9 @@
   background-color: #aba5a5;
 }
 
+.flex-search{
+  display: flex !important;
+}
 
 .carousel-item {
 	height: 100vh !important;
