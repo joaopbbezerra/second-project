@@ -124,6 +124,23 @@ router.get("/favorites/:userId", async (req, res)=>{
     res.render("auth/favorites-details", {userDetail, newArray})
 })
 
+
+
+router.get("/matches", async (req, res)=>{
+    const arrayMoviesMatches = []
+    const userDetail = await User.findById(req.session.currentUser)
+    for (let i = 0; i<userDetail.matches.length; i++){
+        const moviesMatches =  await imdb.get({id: userDetail.matches[i]}, {apiKey: process.env.imdbKey, timeout: 30000})
+        arrayMoviesMatches.push(moviesMatches)
+    }
+    res.render("auth/matches", {userDetail, arrayMoviesMatches})
+})
+module.exports = router;
+
+
+
+
+
 // router.post("/favorites/:userId", async (req, res) =>{
 //     const {favorites} = req.body
 //     await User.findByIdAndUpdate(req.params.userId, {
@@ -141,8 +158,3 @@ router.get("/favorites/:userId", async (req, res)=>{
 //     console.log(req.params.userId)
 //     res.redirect(`/favorites/${req.session.currentUser._id}`)
 // })
-
-router.post("/matches", async (req, res)=>{
-
-})
-module.exports = router;

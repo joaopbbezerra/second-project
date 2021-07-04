@@ -1,0 +1,18 @@
+<h1>Matches:</h1>
+
+<h3>Welcome to {{userDetail.username}} and {{userDetail.date}} matches!</h3>
+<div class="row"></div>
+{{#if arrayMoviesMatches}}
+    {{#each arrayMoviesMatches}}
+        <div class="col-md-4">
+            <div class="card cards-flex">
+                <img class="card-img-top" src="{{poster}}" alt="{{title}}" />
+                <div class="card-body">
+                <h5 class="card-title">{{title}}</h5>
+                <a href="/movies/{{imdbid}}">View Details</a>
+            </div>
+        </div>
+</div>
+    {{/each}}
+{{/if}}
+</div>

@@ -71,11 +71,26 @@ try{
     }
     //Achando o primeiro usuário
     let userNow = await User.findById(req.session.currentUser._id);
-    console.log("First user: ", userNow.date)
+    console.log("First user: ", userNow.favorites)
     //Achando o segundo usuário a partir do primeiro
-    let userOneDate = await User.find({username: userNow.date})
-    console.log("Second user: ",userOneDate.date)
+    let userOneDate = await User.findOne({username: userNow.date})
+    console.log("Second user: ",userOneDate.favorites)
     //For pra checar o match
+    for (let i=0; i<userOneDate.favorites.length; i++){
+        if (req.params.moviesId === userOneDate.favorites[i]){
+            //Usuário logado
+            await User.findByIdAndUpdate(req.session.currentUser._id, {
+                $push: {matches: req.params.moviesId}
+            })
+            //Date do usuário
+            await User.findOneAndUpdate({username: userNow.date}, {
+                $push: {matches: req.params.moviesId}
+            })
+            console.log("Added in both users")
+            
+        }
+    }
+    
 
 
     res.redirect(`/movies-details/${req.params.moviesId}`)
