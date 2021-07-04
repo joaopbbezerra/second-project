@@ -75,23 +75,34 @@ try{
     //Achando o segundo usuário a partir do primeiro
     let userOneDate = await User.findOne({username: userNow.date})
     console.log("Second user: ",userOneDate.favorites)
-    //For pra checar o match
-    for (let i=0; i<userOneDate.favorites.length; i++){
-        if (req.params.moviesId === userOneDate.favorites[i]){
-            //Usuário logado
-            await User.findByIdAndUpdate(req.session.currentUser._id, {
-                $push: {matches: req.params.moviesId}
-            })
-            //Date do usuário
-            await User.findOneAndUpdate({username: userNow.date}, {
-                $push: {matches: req.params.moviesId}
-            })
-            console.log("Added in both users")
-            
+    let repeatedMatches = 0
+    //For pra checar se já está dentro - Tentativa de evitar nested for
+    for (let i = 0; i<userOneDate.matches.length; i++){
+        if (req.params.moviesId === userOneDate.matches[i]){
+            repeatedMatches++
         }
     }
-    
-
+    console.log("Repeated Matches: ",repeatedMatches)
+    if (repeatedMatches !== 0){
+        console.log("Não foi adicionado! Repeated Matches: ", repeatedMatches)
+    }
+    else {
+        //For pra checar o match
+        for (let i=0; i<userOneDate.favorites.length; i++){
+            if (req.params.moviesId === userOneDate.favorites[i]){
+                //Usuário logado
+                await User.findByIdAndUpdate(req.session.currentUser._id, {
+                    $push: {matches: req.params.moviesId}
+                })
+                //Date do usuário
+                await User.findOneAndUpdate({username: userNow.date}, {
+                    $push: {matches: req.params.moviesId}
+                })
+                console.log("Added in both users")
+                
+            }
+        }
+    }
 
     res.redirect(`/movies-details/${req.params.moviesId}`)
 } catch(e){
