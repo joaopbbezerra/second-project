@@ -5,7 +5,11 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-   <title>{{title}}</title>
+	<title>Matchflix</title>
+	<link href="https://fonts.googleapis.com/css2?family=Merienda&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" rel="stylesheet">
    <link rel="stylesheet" href="/stylesheets/style.css" />
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
@@ -15,27 +19,51 @@
 </head>
 
 <body>
-   {{#if loggedInUser}}
-   <div>
-      Welcome, {{loggedInUser}}
-      <a href="/movies-search">Search Movies</a>
-      <a href="/auth/{{loggedId}}">My User</a>
-      <a href="/favorites/{{loggedId}}">Favorites</a>
-      <a href="/matches">Matches</a>
-      {{!-- <a href="/favorites-list/{{loggedId}}">List</a> --}}
-      <form action="/logout" method="POST">
-         <button type="submit">Logout</button>
-      </form>
-   </div>
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+		<div class="container">
+			<a class="navbar-brand" href="/">Matchflix</a> <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav ml-auto">
+          <!-- <input class="form-control me-2" type="search" placeholder="Search for a Movie" aria-label="Search">
+          <button class="btn btn-danger" type="submit">Search</button> -->
+                  {{#if loggedInUser}}
 
-   {{else}}
-   <a href="/signup">Sign up</a>
-   <a href="/login">Login</a>
-   <a href="/movies-search">Search Movies</a>
-   {{/if}}
+                     <li class="nav-item">
+						      <a class="nav-link" href="/movies-search">Search Movies</a>
+					      </li>
+                     <li class="nav-item">
+						      <a class="nav-link" href="/auth/{{loggedId}}">My User</a>
+					      </li>
+                     <li class="nav-item">
+						      <a class="nav-link" href="/favorites/{{loggedId}}">Favorites</a>
+					      </li>
+                     <li class="nav-item">
+						      <a class="nav-link" href="/matches">Matches</a>
+					      </li>
+                     <li class="nav-item">
+						      <a class="nav-link" href="/logout">Logout</a>
+					      </li>
+                  {{else}}
+					      <li class="nav-item">
+						      <a class="nav-link" href="/signup">SignUp</a>
+					      </li>
+					      <li class="nav-item">
+						      <a class="nav-link" href="/login">Login</a>
+					      </li>
+                  {{/if}}
+				</ul>
+			</div>
+		</div>
+	</nav>
    {{{body}}}
 
    <script src="/js/script.js"></script>
+   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js">
+	</script> 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js">
+	</script> 
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js">
+	</script>
 </body>
 
 </html>
