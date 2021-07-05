@@ -13,7 +13,13 @@ const express = require("express");
 // https://www.npmjs.com/package/hbs
 const hbs = require("hbs");
 
+// Added helpers because I want to use the #eq helpers
+const helpers = require("handlebars-helpers")
+hbs.registerHelper(helpers())
+
 const app = express();
+
+
 
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
 require("./config")(app);

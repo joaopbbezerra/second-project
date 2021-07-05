@@ -4,7 +4,7 @@ const User = require("../models/User.model");
 const Movies = require("../models/Movie.model");
 const bcrypt = require("bcryptjs");
 const imdb = require('imdb-api')
-
+// const main = document.getElementById("main");
 // function requireLogin(req, res, next){
 //     if (req.session.currentUser){
 //         next()
@@ -18,16 +18,52 @@ const imdb = require('imdb-api')
 
 router.get("/movies-search", async (req, res)=>{
     const {title} = req.query
-    // console.log("title",title)
     const searchResult = await imdb.search({name: title}, {apiKey: process.env.imdbKey, timeout: 30000})
+    console.log("Entrou",searchResult.poster)
     res.render("movie/movies-search", {searchResult})
 })
 
 router.post("/movies-search", async (req, res)=>{
     const {title} = req.body //Pegando do form
-    // console.log("title post",title)
     const searchResult =  await imdb.search({name: title}, {apiKey: process.env.imdbKey, timeout: 30000})     //Usando o título pra pesquisar na API (método de pesquisa pré feito)
     // console.log(searchResult)
+    const arraySearchs = searchResult.results
+    console.log("Entrou", arraySearchs[0].imdbid)
+    // for (let i = 0; i<arraySearchs.length; i++){
+    //     const movieDetails =  await imdb.get({id: arraySearchs[i].imdbid}, {apiKey: process.env.imdbKey, timeout: 30000})
+    //     console.log(movieDetails.rating)
+    //     const moviesAdd = document.createElement("div");
+    //     moviesAdd.classList.add("movie");
+
+    //     moviesAdd.innerHTML = `
+    //         <img
+    //             src="${movieDetails[i].poster}"
+    //             alt="${movieDetails[i].title}"
+    //         />
+    //         <div class="movie-info">
+    //             <h3>${movieDetails[i].title}</h3>
+    //             <span class="${getClassByRate(
+    //                 movieDetails[i].rating
+    //             )}">${movieDetails[i].rating}</span>
+    //         </div>
+    //         <div class="overview">
+    //             <h3>Overview:</h3>
+    //             ${movieDetails[i].plot}
+    //         </div>
+    //     `;
+
+    //     main.appendChild(moviesAdd);
+
+    // }
+    // function getClassByRate(vote) {
+    //     if (vote >= 8) {
+    //         return "green";
+    //     } else if (vote >= 5) {
+    //         return "orange";
+    //     } else {
+    //         return "red";
+    //     }
+    // }
     res.render("movie/movies-search", {searchResult}) //devolve o searchResult (lista de resultados)
 })
 
