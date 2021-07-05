@@ -1,5 +1,23 @@
 .fixed-top{
-  background-color: #aba5a5;
+  /* background-color: #aba5a5; */
+}
+
+.search-bar-position{
+  z-index: 99999;
+  display: inline-flex;
+  position: absolute;
+  left: 544px;
+}
+
+.center-search-bar{
+  height: 30px;
+  width: 350px !important;
+  margin-top: 10px;
+}
+
+.btn-search-style{
+  margin-top: 10px;
+  height: 30px !important;
 }
 
 .row {
@@ -38,7 +56,7 @@
 .clean-a2{
   text-decoration: none;
   color: white;
-  font-size: 20px;
+  font-size: 25px;
 }
 
 .clean-a2:hover{
@@ -98,8 +116,12 @@
 	color: #fff;
 }
 .navbar-light .navbar-nav .nav-link {
-	color: rgb(220 12 12 / 90%);
+	color: #dc3545 !important;
 }
+.navbar-light .navbar-nav .nav-link:hover {
+	color: black !important;
+}
+
 .navbar-nav {
 	text-align: center;
 }
@@ -290,8 +312,8 @@ form .field input:focus::placeholder{
   text-decoration: underline;
 }
 form .btn{
-  height: 50px;
-  width: 100%;
+  height: 30px;
+  width: 39%;
   border-radius: 5px;
   position: relative;
   overflow: hidden;
@@ -341,13 +363,20 @@ html, body {
 .movie_card {
   position: relative;
   display: block;
-  width: 300px;
-  height: 400px;
+  width: 400px;
+  height: 600px;
   margin: 100px auto;
   overflow: hidden;
   border-radius: 10px;
   transition: all 0.4s;
 }
+
+.movie_card-details {
+
+  height: 700px !important;
+
+}
+
 .movie_card:hover {
   transform: scale(1.02);
   transition: all 0.4s;
@@ -361,7 +390,6 @@ html, body {
   border-radius: 19px;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
 }
 .movie_card .info_section .movie_header {
   position: relative;
@@ -369,7 +397,7 @@ html, body {
   height: 40%;
 }
 .movie_card .info_section .movie_header h1 {
-  width: 217px;
+  width: 350px;
   font-size: 2.5rem;
   color: #fff;
   font-weight: 400;
@@ -377,8 +405,13 @@ html, body {
 .movie_card .info_section .movie_header h4 {
   color: #9ac7fa;
   font-weight: 400;
-  font-size: 1rem;
+  font-size: 18px;
 }
+
+.movie-details-card-width{
+  width: 250px;
+}
+
 .movie_card .info_section .movie_header .minutes {
   display: inline-block;
   margin-top: 10px;
@@ -509,7 +542,7 @@ html, body {
   position: relative;
   float: initial;
   margin-right: 20px;
-  height: 180px;
+  height: 328px;
   box-shadow: 0 0 20px -10px rgb(0 0 0 / 50%);
-  width: 140px;
+  width: 344px;
 }
