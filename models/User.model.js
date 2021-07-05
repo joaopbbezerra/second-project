@@ -18,7 +18,8 @@ const userSchema = new Schema({
   },
   favorites: Array,
   date:String,
-  matches: Array
+  matches: Array,
+  name: String,
 });
 
 const User = model("User", userSchema);

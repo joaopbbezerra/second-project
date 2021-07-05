@@ -20,7 +20,7 @@ router.get("/signup", (req, res)=>{
 })
 
 router.post("/signup", async (req, res)=>{
-    const {username, image, password} = req.body
+    const {username, name, image, password} = req.body
     
     if (username === "" || password === "") {
         res.render("auth/signup", { errorMessage: "Fill username and password" });
@@ -38,7 +38,7 @@ router.post("/signup", async (req, res)=>{
     const saltRounds = 10;
     const salt = bcrypt.genSaltSync(saltRounds);
     const hashedPassword = bcrypt.hashSync(password, salt);
-    await User.create({username, image:image, password:hashedPassword})
+    await User.create({username, name, image:image, password:hashedPassword})
 
     res.redirect("/")
 })

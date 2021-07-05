@@ -2,23 +2,48 @@
     Welcome, {{userDetail.username}}
 </h1>
 {{!-- LOGOUT BONITINHO - BOTÃO --}}
-                <form action="/logout" method="POST">
-                    <button class="btn btn-danger" type="submit">Logout</button>
-                </form>
-<img src="{{userDetail.image}}" alt="">
 
-<p class="color-white">Wanna have some matches? </p>
+<div class="frame">
+    <div class="center">
+      
+          <div class="profile">
+              <div class="image">
+                  <div class="circle-1"></div>
+                  <div class="circle-2"></div>
+                  <img src={{userDetail.image}} width="70" height="70" alt="LionCat">
+              </div>
+              
+              <div class="name">{{userDetail.name}}</div>
+              <div class="name username-smaller">{{userDetail.username}}</div>
 
-<form action="/auth/{{userDetail._id}}" method="POST">
-
-    <label class="color-white" for="">Date</label>
-    <input type="text" name="date" value={{userDetail.date}}>
-    <button class="btn-update color-white" type="submit">Update</button>
-</form>
-
-<h2>
-
-</h2>
+              <div class="actions">
+                    <form action="/logout" method="POST">
+                        <button class="btn to-top" type="submit">Logout</button>
+                    </form>
+                    <form action="/auth/{{userDetail._id}}" method="POST">
+    <label class="color-white" for=""></label>
+    <input class="search-btn-radius" type="text" name="date" value={{userDetail.date}}>
+    <button class="btn color-white" type="submit">Date</button>
+                    </form>
+              </div>
+          </div>
+          
+          <div class="stats">
+              <div class="box">
+                  <span class="value">{{userDetail.favorites.length}}</span>
+                  <span class="parameter">Favorites</span>
+              </div>
+              <div class="box">
+                  <span class="value">{{userDetail.matches.length}}</span>
+                  <span class="parameter">Matches</span>
+              </div>
+              <div class="box">
+                  <span class="value">{{userDetail.date}}</span>
+                  <span class="parameter">My Date</span>
+              </div>
+          </div>
+    </div>
+  </div>
 
 {{#if errorMessage}}
     <p class="color-white">{{errorMessage}}</p>
