@@ -1,17 +1,24 @@
 <h1>Movies Search</h1>
 
 {{#if searchResult}}
-<div class="row">
     {{#each searchResult.results}} 
-<div class="col-md-4">
-    <div class="card cards-flex">
-        <img class="card-img-top" src="{{poster}}" alt="{{title}}" />
-        <div class="card-body">
-            <h5 class="card-title">{{title}}</h5>
-            <a class="clean-a" href="/movies-details/{{imdbid}}">View Details</a>
-        </div>
+<div class="movie_card" id="bright">
+    <div class="info_section">
+      <div class="movie_header">
+        <img class="locandina" src={{poster}}/>
+        <h1><a class="clean-a2" href="/movies-details/{{imdbid}}">{{title}}</a></h1>
+        <h4>{{year}}</h4>
+      </div>
+      <div class="movie_desc">
+      </div>
+      <div class="movie_social">
+        <ul>
+          {{!-- <li><a class="material-icons" href="/movies/{{imdbid}}"></a>Details</li> --}}
+        </ul>
+      </div>
     </div>
-</div>
+    <img class="blur_back src="{{poster}}" alt="">
+  </div>
 {{/each}}
 </div>
 
