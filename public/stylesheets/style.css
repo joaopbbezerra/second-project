@@ -10,19 +10,42 @@
 }
 
 .logo-button{
-  width: 80px;
+  width: 60px;
+  margin-top: -88px;
+  position: relative;
+
+}
+
+.del-button{
+  width: 60px;
   margin-top: -30px;
   position: relative;
 
 }
 
+
+.color-white{
+  color:white;
+}
+
+
 .fav-button{
   border: 0px;
   background-color: transparent;
-  width:50px;
-  z-index:100000;
+  width: 50px;
+  z-index: 100000;
   margin-left: 300px;
 }
+
+
+.del-button{
+  border: 0px;
+  background-color: transparent;
+  width: 66px;
+  z-index: 100000;
+  margin-left: -16px;
+}
+
 
 .center-search-bar{
   height: 30px;

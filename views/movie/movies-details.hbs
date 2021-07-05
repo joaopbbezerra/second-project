@@ -13,9 +13,14 @@ AJEITAR PRA TER UM TAMANHO FIXO DE FOTO PRA QUE ELA NÃO DIMINUA/SUMA
 
       <div class="movie_header">
         <img class="locandina" src={{movieDetails.poster}}/>
+                <div>
+            <form action="/favorites-details/{{movieDetails.imdbid}}/delete" method="POST">
+                <button class="del-button" type="submit"><img class="del-button" src="/images/waste.png" alt="saas"></button>
+            </form>
+        </div>
         <div>
             <form action="/favorites/{{movieDetails.imdbid}}/add" method="POST">
-                <button class="fav-button" type="submit"><img class="logo-button" src="/images/heart-filme4.png" alt="saas"></button>
+                <button class="fav-button" type="submit"><img class="logo-button" src="/images/heart1.png" alt="saas"></button>
             </form>
         </div>
         <h1><a class="clean-a2" href="/movies-details/{{imdbid}}">{{movieDetails.title}}</a></h1>

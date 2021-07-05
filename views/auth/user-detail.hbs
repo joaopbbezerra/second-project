@@ -1,4 +1,4 @@
-<h1>
+<h1 class="color-white">
     Welcome, {{userDetail.username}}
 </h1>
 {{!-- LOGOUT BONITINHO - BOTÃO --}}
@@ -7,13 +7,13 @@
                 </form>
 <img src="{{userDetail.image}}" alt="">
 
-<p>Wanna have some matches? </p>
+<p class="color-white">Wanna have some matches? </p>
 
 <form action="/auth/{{userDetail._id}}" method="POST">
 
-    <label for="">Date</label>
+    <label class="color-white" for="">Date</label>
     <input type="text" name="date" value={{userDetail.date}}>
-    <butto class="btn-update" type="submit">Update</button>
+    <button class="btn-update color-white" type="submit">Update</button>
 </form>
 
 <h2>
@@ -21,5 +21,5 @@
 </h2>
 
 {{#if errorMessage}}
-    <p>{{errorMessage}}</p>
+    <p class="color-white">{{errorMessage}}</p>
 {{/if}}
