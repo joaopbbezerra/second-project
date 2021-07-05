@@ -2,6 +2,39 @@
   background-color: #aba5a5;
 }
 
+.row {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  display: flex !important;
+  flex-wrap: wrap;
+  margin-top: calc(var(--bs-gutter-y) * -1);
+  margin-right: calc(var(--bs-gutter-x)/ -2);
+  margin-left: calc(var(--bs-gutter-x)/ -2);
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: stretch;
+}
+.card{
+  box-shadow: 5px 3px 8px #3c3b3b
+}
+
+.col-md-4{
+  flex: 0 0 auto;
+  width: 25.333333%;
+  display: flex;
+  margin-bottom: 10px;
+  margin-top: 10px !important;
+  
+}
+
+.clean-a{
+  text-decoration: none;
+  color: black
+}
+.clean-a:hover{
+  color: red
+}
+
 .flex-search{
   display: flex !important;
 }

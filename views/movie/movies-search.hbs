@@ -1,11 +1,5 @@
 <h1>Movies Search</h1>
 
-<form class="center-form" action="/movies-search" method="POST">
-    <label for=""></label>
-    <input class="input-form"type="text" name ="title" placeholder="Search by title">
-    <button class="red-button" type="submit">Search by title</button>
-</form>
-
 {{#if searchResult}}
 <div class="row">
     {{#each searchResult.results}} 
@@ -14,7 +8,7 @@
         <img class="card-img-top" src="{{poster}}" alt="{{title}}" />
         <div class="card-body">
             <h5 class="card-title">{{title}}</h5>
-            <a href="/movies-details/{{imdbid}}">View Details</a>
+            <a class="clean-a" href="/movies-details/{{imdbid}}">View Details</a>
         </div>
     </div>
 </div>
