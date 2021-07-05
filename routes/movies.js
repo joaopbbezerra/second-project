@@ -211,4 +211,29 @@ router.post("/favorites-details/:movieImdbid/delete", async (req, res)=>{
     res.redirect(`/favorites/${userDetail._id}`);
 })
 
+router.get("/matches-details/:movieImdbid", async (req, res)=>{
+    const movieDetails =  await imdb.get({id: req.params.movieImdbid}, {apiKey: process.env.imdbKey, timeout: 30000})
+    const userDetail = req.session.currentUser
+    res.render("auth/matches-details", {movieDetails, userDetail})
+})
+
+
+router.post("/matches-details/:movieImdbid/delete", async (req, res)=>{
+    console.log("Botão clicado")
+    const userDetail = req.session.currentUser
+    for (let i=0; i<userDetail.matches.length; i++){
+        console.log("Checando se entrou no for pra testar se o filme tá nos favoritos do date: ", userDetail.favorites[i])
+        if (req.params.movieImdbid === userDetail.matches[i]){
+            console.log("Achou igual")
+            //Usuário logado
+            await User.findByIdAndUpdate(req.session.currentUser._id, {
+                $pull: {matches: req.params.movieImdbid}
+            })
+        }
+    }
+    res.redirect(`/matches`);
+    // favorites/${userDetail._id}
+})
+
+
 module.exports = router;

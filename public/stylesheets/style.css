@@ -605,7 +605,7 @@ html, body {
 	 background: -o-linear-gradient(bottom left, #eebe6c 0%, #ca7c4e 100%);
 	 background: linear-gradient(to top right, #eebe6c 0%, #ca7c4e 100%);
 	 filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#EEBE6C', endColorstr='#CA7C4E',GradientType=1);
-	 color: #786450;
+	 color: #000000;
 	 font-family: 'Open Sans', Helvetica, sans-serif;
 	 -webkit-font-smoothing: antialiased;
 	 -moz-osx-font-smoothing: grayscale;
@@ -643,7 +643,7 @@ html, body {
 	 left: -3px;
 	 border-width: 1px;
 	 border-style: solid;
-	 border-color: #786450 #786450 #786450 transparent;
+	 border-color: #000000 #000000 #000000 transparent;
 	 border-radius: 50%;
 	 transition: all 1.5s ease-in-out;
 }
@@ -652,7 +652,7 @@ html, body {
 	 height: 82px;
 	 top: -6px;
 	 left: -6px;
-	 border-color: #786450 transparent #786450 #786450;
+	 border-color: #000000 transparent #000000 #000000;
 }
  .profile .image img {
 	 display: block;
@@ -692,16 +692,17 @@ html, body {
 	 height: 30px;
 	 margin: 0 auto 10px auto;
 	 background: none;
-	 border: 1px solid #786450;
+	 border: 1px solid #000000;
 	 border-radius: 15px;
 	 font-size: 12px;
 	 font-weight: 600;
 	 box-sizing: border-box;
 	 transition: all 0.3s ease-in-out;
-	 color: #786450;
+	 color: #000000;
 }
  .profile .actions .btn:hover {
-	 background: #786450;
+   border: 1px solid #b93c3c !important;
+	 background: #b93c3c;
 	 color: #fff;
 }
  .stats {
@@ -718,7 +719,9 @@ html, body {
   /* border: 1px solid black; */
 }
  .stats .box:hover {
-	 background: #e1cfc2;
+  border: 1px solid #b93c3c !important;
+  background: #b93c3c;
+  color: #fff;
 	 cursor: pointer;
 }
  .stats .box:nth-child(2) {
@@ -742,7 +745,7 @@ html, body {
   border-radius: 15px;
   font-size: 12px;
   font-weight: 600;
-  color: #786450;
+  color: #000000;
   margin: 0 auto 10px auto;
 }
 

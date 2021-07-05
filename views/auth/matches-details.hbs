@@ -1,20 +1,13 @@
-{{!-- <h1>Movies Details</h1>
-{{#gt movieDetails.rating 5}}
-<div>Maior que 5</div> --}}
-{{!-- FUNCIONANDO
-LEMBRAR DE:
-TROCAR A BORDA DOS CARDS DEPENDENDO DA NOTA
-AJEITAR PRA TER UM TAMANHO FIXO DE FOTO PRA QUE ELA NÃO DIMINUA/SUMA    
+{{!-- AJEITAR OS MATCHES CRIANDO UMA ROTA PRA CÁ E USANDO O DELETE --}}
 
- --}}
-{{!-- {{/gt}} --}}
 <div class="movie_card movie_card-details" id="bright">
     <div class="info_section">
 
       <div class="movie_header">
         <img class="locandina" src={{movieDetails.poster}}/>
                 <div>
-            <form action="/favorites-details/{{movieDetails.imdbid}}/delete" method="POST">
+                    
+            <form action="/matches-details/{{movieDetails.imdbid}}/delete" method="POST">
                 <button class="del-button" type="submit"><img class="del-button" src="/images/waste.png" alt="saas"></button>
             </form>
         </div>
