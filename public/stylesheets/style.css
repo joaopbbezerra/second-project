@@ -9,6 +9,21 @@
   left: 544px;
 }
 
+.logo-button{
+  width: 80px;
+  margin-top: -30px;
+  position: relative;
+
+}
+
+.fav-button{
+  border: 0px;
+  background-color: transparent;
+  width:50px;
+  z-index:100000;
+  margin-left: 300px;
+}
+
 .center-search-bar{
   height: 30px;
   width: 350px !important;
@@ -397,7 +412,7 @@ html, body {
   height: 40%;
 }
 .movie_card .info_section .movie_header h1 {
-  width: 350px;
+  width: 300px;
   font-size: 2.5rem;
   color: #fff;
   font-weight: 400;
