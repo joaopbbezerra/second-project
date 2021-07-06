@@ -14,17 +14,32 @@ AJEITAR PRA TER UM TAMANHO FIXO DE FOTO PRA QUE ELA NÃO DIMINUA/SUMA
       <div class="movie_header">
         <img class="locandina" src={{movieDetails.poster}}/>
                 <div>
+                    {{#if testToDelete}}
             <form action="/favorites-details/{{movieDetails.imdbid}}/delete" method="POST">
                 <button class="del-button" type="submit"><img class="del-button" src="/images/waste.png" alt="saas"></button>
             </form>
+                    {{else}}
+            <form action="/favorites-details/{{movieDetails.imdbid}}/delete" method="POST">
+                <button class="del-button" type="submit"><img class="del-button" src="" alt=""></button>
+            </form>
+                    {{/if}}
         </div>
         <div>
+            {{#if greyFav}}
+                        <form action="/favorites/{{movieDetails.imdbid}}/add" method="POST">
+                <button class="fav-button" type="submit"><img class="logo-button" src="/images/heart1-grey.png" alt="saas"></button>
+            </form>
+            {{else}}
             <form action="/favorites/{{movieDetails.imdbid}}/add" method="POST">
                 <button class="fav-button" type="submit"><img class="logo-button" src="/images/heart1.png" alt="saas"></button>
             </form>
+            {{/if}}
         </div>
         <h1><a class="clean-a2" href="/movies-details/{{imdbid}}">{{movieDetails.title}}</a></h1>
         <ul>
+            {{#if errorMessage}}
+            <p class="white">{{errorMessage}}</p>
+            {{/if}}
             <li><h4 class="movie-details-card-width">Runtime: {{movieDetails.runtime}}</h4></li>
             <li><h4 class="movie-details-card-width">Rating: {{movieDetails.rating}}</h4></li>
             <li><h4 class="movie-details-card-width">Plot: {{movieDetails.plot}}</h4></li>
@@ -45,12 +60,12 @@ AJEITAR PRA TER UM TAMANHO FIXO DE FOTO PRA QUE ELA NÃO DIMINUA/SUMA
             <form action="/favorites/{{movieDetails.imdbid}}/add" method="POST">
                <button class="fav-button" type="submit">Favorite</button>
             </form>
-            
+            {{#if testToDelete}}
             {{!-- Deletar --}}
             <form action="/favorites-details/{{movieDetails.imdbid}}/delete" method="POST">
                 <button type="submit">Delete</button>
             </form>
-            
+            {{/if}}
             
 </div>
 

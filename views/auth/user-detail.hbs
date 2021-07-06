@@ -1,11 +1,10 @@
 <h1 class="color-white">
-    Welcome, {{userDetail.username}}
+    
 </h1>
 {{!-- LOGOUT BONITINHO - BOTÃO --}}
-
+{{!-- ADICIONAR A SEGUNDA CARINHA PRA QUANDO TIVER LOGADO--}}
 <div class="frame">
     <div class="center">
-      
           <div class="profile">
               <div class="image">
                   <div class="circle-1"></div>
@@ -25,6 +24,9 @@
     <input class="search-btn-radius" type="text" name="date" value={{userDetail.date}}>
     <button class="btn color-white" type="submit">Date</button>
                     </form>
+                    {{#if errorMessage}}
+    <p>{{errorMessage}}</p>
+{{/if}}
               </div>
           </div>
           
@@ -38,6 +40,9 @@
                   <span class="parameter">Matches</span>
               </div>
               <div class="box">
+                  {{#if userDetail.date}}
+                  <img src="{{userDate.image}}" width="70" height="70" alt="LionCat">
+                  {{/if}}
                   <span class="value">{{userDetail.date}}</span>
                   <span class="parameter">My Date</span>
               </div>
@@ -45,6 +50,3 @@
     </div>
   </div>
 
-{{#if errorMessage}}
-    <p class="color-white">{{errorMessage}}</p>
-{{/if}}

@@ -84,8 +84,9 @@ router.post("/logout", (req, res)=>{
     res.redirect("/")
 })
 
-router.get("/auth/:userId", async (req, res)=>{
+router.get("/auth/:userId",requireLogin, async (req, res)=>{
     const userDetail = await User.findById(req.params.userId)
+    const { date } = req.body;
     // console.log("Favorites:", req.session.currentUser.favorites[3])
     const newArray = []
     for (let i = 0; i<userDetail.favorites.length; i++){
@@ -93,6 +94,9 @@ router.get("/auth/:userId", async (req, res)=>{
         newArray.push(movieDetails)
     }
     console.log(newArray)
+    if (userDetail.date){
+        let userDate = await User.find({ username: date });
+    }
     res.render("auth/user-detail", {userDetail, newArray})
 })
 
@@ -107,13 +111,14 @@ router.post("/auth/:userId", async (req, res) =>{ //Código rodado depois de cli
         await User.findByIdAndUpdate(req.params.userId, {
             date
         });
-        res.redirect(`/auth/${req.params.userId}`); //atualizar a página
+        res.render("auth/user-detail", {userDetail, userDate, errorMessage: "Date is valid!"})
+        // res.redirect(`/auth/${req.params.userId}`); //atualizar a página
     } else {
-        res.render("auth/user-detail", {userDetail, errorMessage: "Date is not valid, try another one"})
+        res.render("auth/user-detail", {userDetail, userDate, errorMessage: "Date is not valid"})
     }   
 })
 
-router.get("/favorites/:userId", async (req, res)=>{
+router.get("/favorites/:userId", requireLogin, async (req, res)=>{
     const userDetail = await User.findById(req.params.userId)
     // console.log("Favorites:", req.session.currentUser.favorites[3])
     const newArray = []
@@ -126,7 +131,7 @@ router.get("/favorites/:userId", async (req, res)=>{
 
 
 
-router.get("/matches", async (req, res)=>{
+router.get("/matches", requireLogin, async (req, res)=>{
     const arrayMoviesMatches = []
     const userDetail = await User.findById(req.session.currentUser)
     for (let i = 0; i<userDetail.matches.length; i++){

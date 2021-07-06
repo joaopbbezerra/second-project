@@ -1,41 +1,63 @@
-<h1>Movies Details</h1>
-<div class="row">
-<div class="col-md-4">
-    <div class="card cards-flex">
-        <img class="card-img-top" src="{{movieDetails.poster}}" alt="{{movieDetails.title}}" />
-        <div class="card-body">
-            <h5 class="card-title">{{movieDetails.title}}</h5>
-            <ul>
-                <li>
-                    Year: {{movieDetails.year}}
-                </li>
-                <li>
-                    Runtime: {{movieDetails.runtime}}
-                </li>
-                <li>
-                    Rating: {{movieDetails.rating}}/10
-                </li>
-                <li>
-                    Plot: {{movieDetails.plot}}
-                </li>
-                <li>
-                    Id: {{movieDetails.imdbid}}
-                </li>
-            </ul>
-            <a href="/movies-search">Search Movies</a>
-        </div>
+{{!-- <h1>Movies Details</h1>
+{{#gt movieDetails.rating 5}}
+<div>Maior que 5</div> --}}
+{{!-- FUNCIONANDO
+LEMBRAR DE:
+TROCAR A BORDA DOS CARDS DEPENDENDO DA NOTA
+AJEITAR PRA TER UM TAMANHO FIXO DE FOTO PRA QUE ELA NÃO DIMINUA/SUMA    
 
-            {{#if loggedInUser}}
+ --}}
+{{!-- {{/gt}} --}}
+<div class="movie_card movie_card-details" id="bright">
+    <div class="info_section">
+
+      <div class="movie_header">
+        <img class="locandina" src={{movieDetails.poster}}/>
+                <div>
+                    {{!-- {{#if testToDelete}} --}}
+            <form action="/favorites-details/{{movieDetails.imdbid}}/delete" method="POST">
+                <button class="del-button" type="submit"><img class="del-button" src="/images/waste.png" alt="saas"></button>
+            </form>
+                    {{!-- {{/if}} --}}
+        </div>
+        <div>
+            <form action="/favorites/{{movieDetails.imdbid}}/add" method="POST">
+                <button class="fav-button" type="submit"><img class="logo-button" src="/images/heart1-grey.png" alt="saas"></button>
+            </form>
+        </div>
+        <h1><a class="clean-a2" href="/movies-details/{{imdbid}}">{{movieDetails.title}}</a></h1>
+        <ul>
+            {{#if errorMessage}}
+            <p class="white">{{errorMessage}}</p>
+            {{/if}}
+            <li><h4 class="movie-details-card-width">Runtime: {{movieDetails.runtime}}</h4></li>
+            <li><h4 class="movie-details-card-width">Rating: {{movieDetails.rating}}</h4></li>
+            <li><h4 class="movie-details-card-width">Plot: {{movieDetails.plot}}</h4></li>
+        </ul>
+
+      </div>
+      <div class="movie_desc">
+      </div>
+      <div class="movie_social">
+        <ul>
+          {{!-- <li><a class="material-icons" href="/movies/{{imdbid}}"></a>Details</li> --}}
+        </ul>
+      </div>
+    </div>
+    {{!-- <img class="blur_back" src={{poster}} alt=""> --}}
+                
             {{!-- Favoritar --}}
             <form action="/favorites/{{movieDetails.imdbid}}/add" method="POST">
-               <button type="submit"><img src="/images/fav-button.png" alt="saas"></button>
+               <button class="fav-button" type="submit">Favorite</button>
             </form>
-            
+            {{#if testToDelete}}
             {{!-- Deletar --}}
             <form action="/favorites-details/{{movieDetails.imdbid}}/delete" method="POST">
                 <button type="submit">Delete</button>
             </form>
-            
             {{/if}}
+            
+</div>
+
     </div>
 </div>

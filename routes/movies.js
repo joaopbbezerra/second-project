@@ -13,7 +13,14 @@ const imdb = require('imdb-api')
 //         res.redirect("/login")
 //     }
 // }
-
+function requireLogin(req, res, next){
+    if (req.session.currentUser){
+        next()
+    }
+    else {
+        res.redirect("/login")
+    }
+}
 
 
 router.get("/movies-search", async (req, res)=>{
@@ -73,10 +80,31 @@ router.post("/movies-search", async (req, res)=>{
 
 router.get("/movies-details/:movieImdbid", async (req, res)=>{
     const movieDetails =  await imdb.get({id: req.params.movieImdbid}, {apiKey: process.env.imdbKey, timeout: 30000})
-    const userDetail = req.session.currentUser
+    
+    const userDetail = await User.findById(req.session.currentUser._id);
+    let testToDelete = false
+    let greyFav = false
+    if (userDetail && userDetail.favorites){
+        for (let i = 0; i<userDetail.favorites.length; i++){
+            console.log("Favortes: ", userDetail.favorites[i])
+            console.log("Req params: ", req.params.movieImdbid)
+            if (userDetail.favorites[i] === req.params.movieImdbid){
+                testToDelete = true
+                greyFav = true
+            }
+        }
+    }
+    console.log("Test Delete Button: ", testToDelete)
     // res.render("albums", {albums: albumResult.body.items})
     // console.log(movieDetails)
-    res.render("movie/movies-details", {movieDetails, userDetail})
+    if (testToDelete){
+        console.log("Entrou no test")
+        res.render("movie/movies-details", {movieDetails, testToDelete, greyFav, userDetail})
+    }
+    else {
+        res.render("movie/movies-details", {movieDetails, userDetail})
+    }
+    
 })
 
 router.post("/movies-details/:movieImdbid", async (req, res)=>{
@@ -89,7 +117,7 @@ router.post("/movies-details/:movieImdbid", async (req, res)=>{
 
 //Adicionar filmes, checar/fazer matches
 
-router.post("/favorites/:moviesId/add", async (req, res)=>{
+router.post("/favorites/:moviesId/add", requireLogin, async (req, res)=>{
 try{
     // console.log("favorites", req.session.currentUser.favorites)
     // console.log("movie id", req.params.moviesId)
@@ -189,7 +217,7 @@ try{
 //     res.render("movie/movies-favorites-details", {movieDetails, userDetail})
 // })
 
-router.get("/favorites-details/:movieImdbid", async (req, res)=>{
+router.get("/favorites-details/:movieImdbid", requireLogin, async (req, res)=>{
     const movieDetails =  await imdb.get({id: req.params.movieImdbid}, {apiKey: process.env.imdbKey, timeout: 30000})
     const userDetail = req.session.currentUser
     res.render("movie/movies-favorites-details", {movieDetails, userDetail})
@@ -211,7 +239,7 @@ router.post("/favorites-details/:movieImdbid/delete", async (req, res)=>{
     res.redirect(`/favorites/${userDetail._id}`);
 })
 
-router.get("/matches-details/:movieImdbid", async (req, res)=>{
+router.get("/matches-details/:movieImdbid", requireLogin, async (req, res)=>{
     const movieDetails =  await imdb.get({id: req.params.movieImdbid}, {apiKey: process.env.imdbKey, timeout: 30000})
     const userDetail = req.session.currentUser
     res.render("auth/matches-details", {movieDetails, userDetail})
