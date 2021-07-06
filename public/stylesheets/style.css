@@ -215,7 +215,7 @@ html,body{
   background: #252121!important;
 }
 ::selection{
-  background: #fa4299;
+  background: #cb1110;
   color: #fff;
 }
 .wrapper{
@@ -612,10 +612,10 @@ html, body {
 }
  .center {
   position: absolute;
-  top: 50px;
+  top: 40px;
   left: 40px;
-  height: 330px;
-  width: 340px;
+  height: 380px;
+  width: 390px;
   background: white;
   border-radius: 3px;
   overflow: hidden;
@@ -624,7 +624,7 @@ html, body {
  .profile {
 	 float: left;
 	 width: 200px;
-   height: 330px;
+   height: 380px;
 	 text-align: center;
    background: #f5dfe0;
 }
@@ -647,6 +647,7 @@ html, body {
 	 border-radius: 50%;
 	 transition: all 1.5s ease-in-out;
 }
+
  .profile .image .circle-2 {
 	 width: 82px;
 	 height: 82px;
@@ -654,6 +655,7 @@ html, body {
 	 left: -6px;
 	 border-color: #000000 transparent #000000 #000000;
 }
+
  .profile .image img {
 	 display: block;
 	 border-radius: 50%;
@@ -661,12 +663,15 @@ html, body {
 }
  .profile .image:hover {
 	 cursor: pointer;
+   border-color: #f70000 transparent #ff0000 #ff0000!important;
 }
  .profile .image:hover .circle-1, .profile .image:hover .image .circle-2, .profile .image .image:hover .circle-2 {
 	 transform: rotate(360deg);
+   border-color: #f70000 transparent #ff0000 #ff0000!important;
 }
  .profile .image:hover .circle-2 {
 	 transform: rotate(-360deg);
+   border-color: #f70000 transparent #ff0000 #ff0000!important;
 }
  .profile .name {
   font-size: 20px;
@@ -710,8 +715,8 @@ html, body {
 }
  .stats .box {
   box-sizing: border-box;
-  width: 140px;
-  height: 110px;
+  width: 190px;
+  height: 126px;
   background: #f5dfe0;
   text-align: center;
   padding-top: 28px;
@@ -746,10 +751,10 @@ html, body {
   font-size: 12px;
   font-weight: 600;
   color: #000000;
-  margin: 0 auto 10px auto;
+  margin: 50px auto 10px auto;
 }
 
 .to-top{
-  margin-top: -10px !important;
+  margin-top: -4px !important;
   margin-bottom: 30px !important;
 }
