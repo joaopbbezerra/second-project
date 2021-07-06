@@ -121,17 +121,20 @@ router.post("/favorites/:moviesId/add", requireLogin, async (req, res)=>{
 try{
     // console.log("favorites", req.session.currentUser.favorites)
     // console.log("movie id", req.params.moviesId)
-    
+    const checkUserInfo = await User.findById(req.session.currentUser._id);
     let counterSameMovies = 0
-    if (req.session.currentUser.favorites.length < 1){
+    console.log("User Info: ", checkUserInfo)
+    if (checkUserInfo.favorites.length < 1){
         await User.findByIdAndUpdate(req.session.currentUser._id, {
             $push: {favorites: req.params.moviesId}  
         })
         // res.redirect(`/movies-details/${req.params.moviesId}`)
     } else {
-        for (let i = 0; i<req.session.currentUser.favorites.length; i++){
-            console.log(req.session.currentUser.favorites[i])
-            if (req.session.currentUser.favorites[i]===req.params.moviesId){
+
+        for (let i = 0; i<checkUserInfo.favorites.length; i++){
+            console.log(checkUserInfo.favorites[i])
+            const userCheck = await User.findByIdAndUpdate(req.session.currentUser._id)
+            if (userCheck.favorites[i]===req.params.moviesId){
                 counterSameMovies++
             }
         }
@@ -223,9 +226,9 @@ router.get("/favorites-details/:movieImdbid", requireLogin, async (req, res)=>{
     res.render("movie/movies-favorites-details", {movieDetails, userDetail})
 })
 
-router.post("/favorites-details/:movieImdbid/delete", async (req, res)=>{
+router.post("/favorites-details/:movieImdbid/delete", requireLogin, async (req, res)=>{
     console.log("Botão clicado")
-    const userDetail = req.session.currentUser
+    const userDetail = await User.findById(req.session.currentUser._id);
     for (let i=0; i<userDetail.favorites.length; i++){
         console.log("Checando se entrou no for pra testar se o filme tá nos favoritos do date: ", userDetail.favorites[i])
         if (req.params.movieImdbid === userDetail.favorites[i]){
@@ -259,7 +262,7 @@ router.post("/matches-details/:movieImdbid/delete", async (req, res)=>{
             })
         }
     }
-    res.redirect(`/matches`);
+    res.redirect(`/login`);
     // favorites/${userDetail._id}
 })
 
