@@ -12,30 +12,8 @@ AJEITAR PRA TER UM TAMANHO FIXO DE FOTO PRA QUE ELA NÃO DIMINUA/SUMA
     <div class="info_section">
 
       <div class="movie_header">
-        <img class="locandina" src={{movieDetails.poster}}/>
-                <div>
-                    {{#if testToDelete}}
-            <form action="/favorites-details/{{movieDetails.imdbid}}/delete" method="POST">
-                <button class="del-button" type="submit"><img class="del-button" src="/images/waste.png" alt="saas"></button>
-            </form>
-                    {{else}}
-            <form action="/favorites-details/{{movieDetails.imdbid}}/delete" method="POST">
-                <button class="del-button" type="submit"><img class="del-button" src="" alt=""></button>
-            </form>
-                    {{/if}}
-        </div>
-        <div>
-            {{#if greyFav}}
-                        <form action="/favorites/{{movieDetails.imdbid}}/add" method="POST">
-                <button class="fav-button" type="submit"><img class="logo-button" src="/images/heart1-grey.png" alt="saas"></button>
-            </form>
-            {{else}}
-            <form action="/favorites/{{movieDetails.imdbid}}/add" method="POST">
-                <button class="fav-button" type="submit"><img class="logo-button" src="/images/heart1.png" alt="saas"></button>
-            </form>
-            {{/if}}
-        </div>
-        <h1><a class="clean-a2" href="/movies-details/{{imdbid}}">{{movieDetails.title}}</a></h1>
+        {{!-- <img class="locandina" src={{movieDetails.poster}}/> --}}
+        <h1 class="title-details"><a class="clean-a2 " href="/movies-details/{{imdbid}}">{{movieDetails.title}}</a></h1>
         <ul>
             {{#if errorMessage}}
             <p class="white">{{errorMessage}}</p>
@@ -44,7 +22,28 @@ AJEITAR PRA TER UM TAMANHO FIXO DE FOTO PRA QUE ELA NÃO DIMINUA/SUMA
             <li><h4 class="movie-details-card-width">Rating: {{movieDetails.rating}}</h4></li>
             <li><h4 class="movie-details-card-width">Plot: {{movieDetails.plot}}</h4></li>
         </ul>
-
+                            <div>
+            {{#if testToDelete}}
+            <form action="/favorites-details/{{movieDetails.imdbid}}/delete" method="POST">
+                <button class="del-button" type="submit"><img class="del-button fixing-buttons" src="/images/waste.png" alt="saas"></button>
+            </form>
+            {{else}}
+            <form action="/favorites-details/{{movieDetails.imdbid}}/delete" method="POST">
+                <button class="del-button" type="submit"><img class="del-button fixing-buttons" src="" alt=""></button>
+            </form>
+            {{/if}}
+        </div>
+        <div>
+            {{#if greyFav}}
+            <form action="/favorites/{{movieDetails.imdbid}}/add" method="POST">
+                <button class="fav-button" type="submit"><img class="logo-button fixing-heart" src="/images/heart1-grey.png" alt="saas"></button>
+            </form>
+            {{else}}
+            <form action="/favorites/{{movieDetails.imdbid}}/add" method="POST">
+                <button class="fav-button" type="submit"><img class="logo-button fixing-heart coloured-heart" src="/images/heart1.png" alt="saas"></button>
+            </form>
+            {{/if}}
+        </div>
       </div>
       <div class="movie_desc">
       </div>
@@ -54,7 +53,7 @@ AJEITAR PRA TER UM TAMANHO FIXO DE FOTO PRA QUE ELA NÃO DIMINUA/SUMA
         </ul>
       </div>
     </div>
-    {{!-- <img class="blur_back" src={{poster}} alt=""> --}}
+    <img class="blur_back" src="{{movieDetails.poster}}" alt="">
                 
             {{!-- Favoritar --}}
             <form action="/favorites/{{movieDetails.imdbid}}/add" method="POST">

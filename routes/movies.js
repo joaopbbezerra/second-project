@@ -78,9 +78,8 @@ router.post("/movies-search", async (req, res)=>{
 //     res.render("movie/movies-list")
 // })
 
-router.get("/movies-details/:movieImdbid", async (req, res)=>{
+router.get("/movies-details/:movieImdbid", requireLogin, async (req, res)=>{
     const movieDetails =  await imdb.get({id: req.params.movieImdbid}, {apiKey: process.env.imdbKey, timeout: 30000})
-    
     const userDetail = await User.findById(req.session.currentUser._id);
     let testToDelete = false
     let greyFav = false
@@ -112,6 +111,24 @@ router.post("/movies-details/:movieImdbid", async (req, res)=>{
     // console.log(movieDetails)
     res.redirect("/movie/movies-details")
 })
+
+//Testar popup
+
+
+
+
+
+router.get("/matches-popup", requireLogin, async (req, res)=>{
+    const checkUserInfo = await User.findById(req.session.currentUser._id);
+    console.log("LastMatch",checkUserInfo.matches)
+    const checkDateInfo = await User.findOneAndUpdate({username: checkUserInfo.date})
+    const lastMovie = checkUserInfo.matches[checkUserInfo.matches.length -1]
+    console.log("Ultimo Filme", lastMovie)
+    const movieDetails =  await imdb.get({id: lastMovie}, {apiKey: process.env.imdbKey, timeout: 30000})
+    res.render("movie/match-popup", {checkUserInfo, checkDateInfo, movieDetails} )
+})
+
+
 
 
 

@@ -10,19 +10,33 @@
 }
 
 .logo-button{
-  width: 60px;
-  margin-top: -88px;
+  width: 65px !important;
+  margin-top: -101px;
   position: relative;
+  margin-left: 33px;
 
 }
 
 .del-button{
-  width: 60px;
-  margin-top: -30px;
+  width: 80px;
+  margin-top: 95px;
   position: relative;
+  margin-top: -10px !important;
 
 }
 
+.fixing-buttons{
+  margin-left: -50px !important;
+  margin-top: -12px !important
+}
+
+.fixing-heart{
+  margin-left: 7px !important;
+}
+
+.coloured-heart{
+  margin-top: -52px !important;
+}
 
 .color-white{
   color:#786450;
@@ -43,7 +57,7 @@
   background-color: transparent;
   width: 66px;
   z-index: 100000;
-  margin-left: -16px;
+  margin-left: -3px;
 }
 
 
@@ -93,13 +107,14 @@
 
 .clean-a2{
   text-decoration: none;
-  color: white;
-  font-size: 25px;
+  color: #cb1110;
+  font-size: 27px;
+  font-weight: 600;
 }
 
 .clean-a2:hover{
   text-decoration: none;
-  color: rgb(129, 115, 115)
+  color: rgb(201, 67, 67)
 }
 
 .flex-search{
@@ -154,10 +169,10 @@
 	color: #fff;
 }
 .navbar-light .navbar-nav .nav-link {
-	color: #dc3545 !important;
+	color: #cb1110 !important;
 }
 .navbar-light .navbar-nav .nav-link:hover {
-	color: black !important;
+	color: rgb(201, 67, 67) !important;
 }
 
 .navbar-nav {
@@ -441,13 +456,27 @@ html, body {
   font-weight: 400;
 }
 .movie_card .info_section .movie_header h4 {
-  color: #9ac7fa;
+  color: #cb1110;
   font-weight: 400;
   font-size: 18px;
 }
 
+.title-details{
+  margin-top: 400px !important;
+  font-size:25px !important;
+  margin-left: 23px;
+}
+
 .movie-details-card-width{
-  width: 250px;
+  width: 300px;
+  color: red;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 6; /* number of lines to show */
+  -webkit-box-orient: vertical;
+
+
 }
 
 .movie_card .info_section .movie_header .minutes {
@@ -518,7 +547,7 @@ html, body {
     width: 50%;
   }
   .info_section {
-    background: linear-gradient(to right, #484242 50%, transparent 100%);
+    background: linear-gradient(to right, #000000 14%, transparent 100%);
   }
   .blur_back {
     background-position: -100% 10% !important;
@@ -751,7 +780,7 @@ html, body {
   font-size: 12px;
   font-weight: 600;
   color: #000000;
-  margin: 50px auto 10px auto;
+  margin: 16px auto 10px auto;
 }
 
 .to-top{
