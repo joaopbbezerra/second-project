@@ -1,19 +1,25 @@
-<h1>TEST DA POP UP</h1>
 
-{{!-- LOGOUT BONITINHO - BOTÃO --}}
-{{!-- ADICIONAR A SEGUNDA CARINHA PRA QUANDO TIVER LOGADO--}}
-<div class="frame">
-    <div class="center">
-          <div class="profile">
-              <div class="image">
-                  <div class="circle-1"></div>
-                  <div class="circle-2"></div>
-                  <img src={{checkuserInfo.image}} width="70" height="70" alt="LionCat">
-              </div>
-              
-              <div class="name">{{checkUserInfo.name}}</div>
-              </div>
-          </div>
-          
-  </div>
+<div class="container">
+      <input type="checkbox" id="check">
+      <label class="show_button" id="check" for="check">Click Me</label>
+      <div class="background"></div>
+      <div class="alert_box">
+        <div class="icon">
+            <i class="far fa-heart"></i>
+        </div>
+        <header>Yes!</header>
+        <p>You have a match!</p>
+        <div class="btns">
+          <label for="check">Continue</label>
+        </div>
+      </div>
+    </div>
 
+    {{#if testMatch}}
+    <script>
+    window.onload = function(){
+        const button = document.getElementById('check');
+        button.click()
+    }
+    </script>
+{{/if}}

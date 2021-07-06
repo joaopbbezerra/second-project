@@ -56,17 +56,35 @@ AJEITAR PRA TER UM TAMANHO FIXO DE FOTO PRA QUE ELA NÃO DIMINUA/SUMA
     <img class="blur_back" src="{{movieDetails.poster}}" alt="">
                 
             {{!-- Favoritar --}}
-            <form action="/favorites/{{movieDetails.imdbid}}/add" method="POST">
-               <button class="fav-button" type="submit">Favorite</button>
-            </form>
-            {{#if testToDelete}}
-            {{!-- Deletar --}}
-            <form action="/favorites-details/{{movieDetails.imdbid}}/delete" method="POST">
-                <button type="submit">Delete</button>
-            </form>
-            {{/if}}
+
             
 </div>
 
     </div>
 </div>
+
+{{#if testMatch}}
+<div class="container">
+      <input type="checkbox" id="check">
+      <label class="show_button" id="check" for="check">Click Me</label>
+      <div class="background"></div>
+      <div class="alert_box">
+        <div class="icon">
+            <i class="far fa-heart"></i>
+        </div>
+        <header>Yes!</header>
+        <p>You have a match!</p>
+        <div class="btns">
+          <label for="check">Continue</label>
+        </div>
+      </div>
+    </div>
+
+    
+    <script>
+    window.onload = function(){
+        const button = document.getElementById('check');
+        button.click()
+    }
+    </script>
+{{/if}}

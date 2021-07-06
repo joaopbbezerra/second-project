@@ -81,11 +81,13 @@ router.post("/movies-search", async (req, res)=>{
 router.get("/movies-details/:movieImdbid", requireLogin, async (req, res)=>{
     const movieDetails =  await imdb.get({id: req.params.movieImdbid}, {apiKey: process.env.imdbKey, timeout: 30000})
     const userDetail = await User.findById(req.session.currentUser._id);
+    let userOneDate = await User.findOne({username: userDetail.date})
+    let testMatch = false
     let testToDelete = false
     let greyFav = false
     if (userDetail && userDetail.favorites){
         for (let i = 0; i<userDetail.favorites.length; i++){
-            console.log("Favortes: ", userDetail.favorites[i])
+            console.log("Favorites: ", userDetail.favorites[i])
             console.log("Req params: ", req.params.movieImdbid)
             if (userDetail.favorites[i] === req.params.movieImdbid){
                 testToDelete = true
@@ -93,12 +95,22 @@ router.get("/movies-details/:movieImdbid", requireLogin, async (req, res)=>{
             }
         }
     }
+    for (let i = 0; i<userOneDate.favorites.length; i++){
+        if (movieDetails.imdbid === userOneDate.favorites[i]){
+            testMatch = true
+        }
+    }
     console.log("Test Delete Button: ", testToDelete)
     // res.render("albums", {albums: albumResult.body.items})
     // console.log(movieDetails)
+
     if (testToDelete){
-        console.log("Entrou no test")
-        res.render("movie/movies-details", {movieDetails, testToDelete, greyFav, userDetail})
+        if (testMatch){
+            console.log("Entrou no test")
+            res.render("movie/movies-details", {movieDetails, testToDelete, greyFav, userDetail, testMatch})
+        } else{
+            res.render("movie/movies-details", {movieDetails, testToDelete, greyFav, userDetail, testMatch})
+        }
     }
     else {
         res.render("movie/movies-details", {movieDetails, userDetail})
@@ -119,13 +131,22 @@ router.post("/movies-details/:movieImdbid", async (req, res)=>{
 
 
 router.get("/matches-popup", requireLogin, async (req, res)=>{
+    const testMatch = true
     const checkUserInfo = await User.findById(req.session.currentUser._id);
-    console.log("LastMatch",checkUserInfo.matches)
-    const checkDateInfo = await User.findOneAndUpdate({username: checkUserInfo.date})
-    const lastMovie = checkUserInfo.matches[checkUserInfo.matches.length -1]
-    console.log("Ultimo Filme", lastMovie)
-    const movieDetails =  await imdb.get({id: lastMovie}, {apiKey: process.env.imdbKey, timeout: 30000})
-    res.render("movie/match-popup", {checkUserInfo, checkDateInfo, movieDetails} )
+    console.log("checkUserInfo",checkUserInfo)
+    if (checkUserInfo.date && checkUserInfo.matches.length > 0){
+        const checkDateInfo = await User.findOne({username: checkUserInfo.date})
+        console.log("CheckInfo", checkDateInfo)
+        const lastMovie = checkUserInfo.matches[checkUserInfo.matches.length -1]
+        console.log("Ultimo Filme", lastMovie)
+        const movieDetails =  await imdb.get({id: lastMovie}, {apiKey: process.env.imdbKey, timeout: 30000})
+        res.render("movie/match-popup", {checkUserInfo, checkDateInfo, movieDetails, testMatch})
+    }
+    else {
+        res.render("movie/match-popup", {checkUserInfo, checkDateInfo, movieDetails})
+    }
+    
+    
 })
 
 

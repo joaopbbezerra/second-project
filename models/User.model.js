@@ -14,7 +14,7 @@ const userSchema = new Schema({
   },
   image:{
     type:String,
-    default:"https://media.giphy.com/media/1431E7VsLJxfqg/giphy.gif"
+    default:"https://media.giphy.com/media/jRlP4zbERYW5HoCLvX/giphy.gif"
   },
   favorites: Array,
   date:String,
