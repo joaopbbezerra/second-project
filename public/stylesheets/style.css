@@ -15,6 +15,10 @@
   font-size: 20px;
 }
 
+.select-img{
+  padding: 8px;
+}
+
 .logo-button{
   width: 65px !important;
   margin-top: -101px;

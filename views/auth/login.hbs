@@ -43,16 +43,19 @@
                      Not a member? <a href="">Signup now</a>
                   </div>
                </form>
-               <form action="/signup" class="signup" method="POST">
+               <form action="/signup" class="signup" method="POST"  enctype="multipart/form-data">
                   <div class="field">
                      <input type="text" name="username" placeholder="Username" required>
                   </div>
                     <div class="field">
-                        <input type="text" name="name" placeholder="Username" required>
+                        <input type="text" name="name" placeholder="Name" required>
                     </div>
                   <div class="field">
                      <input type="password" name="password" placeholder="Password" required>
                   </div>
+                    <div class="field">
+                        <input class="select-img" type="file" name="image" placeholder="Select an image" required>
+                    </div>
                   <!-- <div class="field">
                      <input type="password" placeholder="Confirm password" required>
                   </div> -->

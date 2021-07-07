@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require("../models/User.model");
 const Movies = require("../models/Movie.model");
 const bcrypt = require("bcryptjs");
-// const fileUpload = require("../config/cloudinary");
+const fileUpload = require("../config/cloudinary");
 const imdb = require('imdb-api')
 
 function requireLogin(req, res, next){
@@ -19,10 +19,12 @@ router.get("/signup", (req, res)=>{
     res.render("auth/signup")
 })
 
-router.post("/signup", async (req, res)=>{
-
-    
-    const {username, name, image, password} = req.body
+router.post("/signup", fileUpload.single("image"), async (req, res)=>{
+    let fileUrlOnCloudinary = "";
+    if (req.file) {
+      fileUrlOnCloudinary = req.file.path;
+    }
+    const {username, name, password} = req.body
     
     if (username === "" || password === "") {
         res.render("auth/signup", { errorMessage: "Fill username and password" });
@@ -40,7 +42,7 @@ router.post("/signup", async (req, res)=>{
     const saltRounds = 10;
     const salt = bcrypt.genSaltSync(saltRounds);
     const hashedPassword = bcrypt.hashSync(password, salt);
-    await User.create({username, name, image:image, password:hashedPassword})
+    await User.create({username, name, image:fileUrlOnCloudinary, password:hashedPassword})
 
     res.redirect("/")
 })
