@@ -29,7 +29,7 @@ AJEITAR PRA TER UM TAMANHO FIXO DE FOTO PRA QUE ELA NÃO DIMINUA/SUMA
         </div>
         <div>
             <form action="/feeling-lucky-details/{{movieDetails.imdbid}}/fav" method="POST">
-                <button class="fav-button" type="submit"><img class="logo-button fixing-heart coloured-heart fav-heart" src="/images/heart1.png" alt="saas"></button>
+                <button onclick="clickMatch()" class="fav-button" type="submit"><img class="logo-button fixing-heart coloured-heart fav-heart" src="/images/heart1.png" alt="saas"></button>
             </form>
 
         </div>
@@ -52,7 +52,7 @@ AJEITAR PRA TER UM TAMANHO FIXO DE FOTO PRA QUE ELA NÃO DIMINUA/SUMA
     </div>
 </div>
 
-{{#if testMatch}}
+
 
 <div class="container">
       <input type="checkbox" id="check">
@@ -72,10 +72,9 @@ AJEITAR PRA TER UM TAMANHO FIXO DE FOTO PRA QUE ELA NÃO DIMINUA/SUMA
 
     
     <script>
-    window.onload = function(){
+     function clickMatch(){
         const button = document.getElementById('check');
         button.click()
     }
-    
+
     </script>
-{{/if}}
