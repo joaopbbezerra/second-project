@@ -18,8 +18,8 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
     cloudinary,
     params: {
-        folder: "movies", //Pasta que está sendo criada na cloud do Cloudinary
-        allowed_formats: ["png", "jpg"], //Tipos permitidos, caso sejam todos é só tirar o allowed_formats
+        folder: "matchflix", //Pasta que está sendo criada na cloud do Cloudinary
+                        //Tipos permitidos, caso sejam todos é só tirar o allowed_formats
     },
     filename: function(red, file, cb){
         cb(null, file.originalname)

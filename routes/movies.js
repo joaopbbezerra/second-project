@@ -311,6 +311,7 @@ router.post("/matches-details/:movieImdbid/delete", async (req, res)=>{
 // RESTART FROM HERE
 
 router.get("/pass-feeling-lucky", requireLogin, async (req, res)=>{
+try{
     const userDetail = await User.findById(req.session.currentUser._id);
     // const searchResult =  await imdb.search({name: title}, {apiKey: process.env.imdbKey, timeout: 30000})     //Usando o título pra pesquisar na API (método de pesquisa pré feito)
     const arrayFavDate = []
@@ -320,36 +321,52 @@ router.get("/pass-feeling-lucky", requireLogin, async (req, res)=>{
         if (dateDetail.favorites){
             const firstMovie = dateDetail.favorites[0]
             res.redirect(`/feeling-lucky-details/${firstMovie}`)
+        } else{
+            res.redirect("/")
         }
     }
     res.redirect("/")
+} catch (e){
+    const userDetail = await User.findById(req.session.currentUser._id);
+    res.redirect(`/favorites/${userDetail._id}`)
+    console.log(e)
+    }
+   
 })
 
 router.get("/feeling-lucky-details/:imdbId", requireLogin, async (req, res)=>{
-    const userDetail = await User.findById(req.session.currentUser._id);
-    const dateDetail = await User.findOne({username: userDetail.date})
-    let idMovie = req.params.imdbId
-    console.log(dateDetail.favorites[0])
-    firstFav = dateDetail.favorites[0]
-    console.log("Id movieeeeeee", idMovie)
-    const movieDetails =  await imdb.get({id: idMovie}, {apiKey: process.env.imdbKey, timeout: 30000})
-    console.log("Movie detailsssss", movieDetails)
-    let testMatch = false
-    for (let i = 0; i<userDetail.favorites.length; i++){
-        if (req.params.imdbId == userDetail.favorites[i]){
-            testMatch = true
+    try{
+        const userDetail = await User.findById(req.session.currentUser._id);
+        const dateDetail = await User.findOne({username: userDetail.date})
+        let idMovie = req.params.imdbId
+        console.log(dateDetail.favorites[0])
+        firstFav = dateDetail.favorites[0]
+        console.log("Id movieeeeeee", idMovie)
+        const movieDetails =  await imdb.get({id: idMovie}, {apiKey: process.env.imdbKey, timeout: 30000})
+        console.log("Movie detailsssss", movieDetails)
+        let testMatch = false
+        for (let i = 0; i<userDetail.favorites.length; i++){
+            if (req.params.imdbId == userDetail.favorites[i]){
+                testMatch = true
+            }
         }
+        console.log("CADE MEU MATCHHHHHHH")
+        if (testMatch){
+            console.log("TESTOU MATCH")
+            res.render("movie/feeling-lucky-details", {movieDetails, testMatch})
+        } else{
+            res.render("movie/feeling-lucky-details", {movieDetails})
+        }
+    } catch(e){
+        const userDetail = await User.findById(req.session.currentUser._id);
+        res.redirect(`/favorites/${userDetail._id}`)
+        console.log(e)
     }
-    console.log("CADE MEU MATCHHHHHHH")
-    if (testMatch){
-        console.log("TESTOU MATCH")
-        res.render("movie/feeling-lucky-details", {movieDetails, testMatch})
-    } else{
-        res.render("movie/feeling-lucky-details", {movieDetails})
-    }
+
 })
 
 router.post("/feeling-lucky-details/:imdbId/fav", requireLogin, async (req, res)=>{
+
     const userDetail = await User.findById(req.session.currentUser._id);
     const dateDetail = await User.findOne({username: userDetail.date})
     let idMovie = req.params.imdbId

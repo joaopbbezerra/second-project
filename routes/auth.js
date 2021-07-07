@@ -20,6 +20,8 @@ router.get("/signup", (req, res)=>{
 })
 
 router.post("/signup", async (req, res)=>{
+
+    
     const {username, name, image, password} = req.body
     
     if (username === "" || password === "") {
