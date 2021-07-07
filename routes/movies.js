@@ -187,12 +187,12 @@ try{
     }
         //Achando o primeiro usuário
     let userNow = await User.findById(req.session.currentUser._id);
-    console.log("First user: ", userNow.favorites)
+    // console.log("First user: ", userNow.favorites)
 
     //Achando o segundo usuário a partir do primeiro
     
     let userOneDate = await User.findOne({username: userNow.date})
-    console.log("Checando se há o date: ", userOneDate)
+    // console.log("Checando se há o date: ", userOneDate)
     //Checando se há um date pro usuário
     if (userOneDate){
         let repeatedMatches = 0
@@ -209,7 +209,7 @@ try{
         else {
             //For pra checar o match
                 for (let i=0; i<userOneDate.favorites.length; i++){
-                    console.log("Checando se entrou no for pra testar se o filme tá nos favoritos do date: ", userOneDate.favorites[i])
+                    // console.log("Checando se entrou no for pra testar se o filme tá nos favoritos do date: ", userOneDate.favorites[i])
                     if (req.params.moviesId === userOneDate.favorites[i]){
                         //Usuário logado
                         await User.findByIdAndUpdate(req.session.currentUser._id, {
@@ -290,12 +290,12 @@ router.get("/matches-details/:movieImdbid", requireLogin, async (req, res)=>{
 
 
 router.post("/matches-details/:movieImdbid/delete", async (req, res)=>{
-    console.log("Botão clicado")
+    // console.log("Botão clicado")
     const userDetail = req.session.currentUser
     for (let i=0; i<userDetail.matches.length; i++){
-        console.log("Checando se entrou no for pra testar se o filme tá nos favoritos do date: ", userDetail.favorites[i])
+        // console.log("Checando se entrou no for pra testar se o filme tá nos favoritos do date: ", userDetail.favorites[i])
         if (req.params.movieImdbid === userDetail.matches[i]){
-            console.log("Achou igual")
+            // console.log("Achou igual")
             //Usuário logado
             await User.findByIdAndUpdate(req.session.currentUser._id, {
                 $pull: {matches: req.params.movieImdbid}
@@ -312,15 +312,19 @@ router.post("/matches-details/:movieImdbid/delete", async (req, res)=>{
 
 router.get("/feeling-lucky", requireLogin, async (req, res)=>{
     const userDetail = await User.findById(req.session.currentUser._id);
+    // const searchResult =  await imdb.search({name: title}, {apiKey: process.env.imdbKey, timeout: 30000})     //Usando o título pra pesquisar na API (método de pesquisa pré feito)
     const arrayFavDate = []
     if (userDetail.date){
+        console.log("AChou o date")
         const dateDetail = await User.findOne({username: userDetail.date})
         if (dateDetail.favorites){
+            console.log("Entrou nos fav")
             for (let i = 0; i<dateDetail.favorites.length;i++){
                 const dateMoviesArray =  await imdb.get({id: dateDetail.favorites[i]}, {apiKey: process.env.imdbKey, timeout: 30000})
                 arrayFavDate.push(dateMoviesArray)
             }
-            res.render("movie/feeling-lucky", {arrayFavDate, userDetail})
+            // console.log("Array Fav", arrayFavDate)
+            res.render("movie/feeling-lucky", {arrayFavDate})
         }
     }
     res.render("movie/feeling-lucky", {userDetail})
