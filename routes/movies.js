@@ -287,6 +287,8 @@ router.get("/matches-details/:movieImdbid", requireLogin, async (req, res)=>{
 })
 
 
+
+
 router.post("/matches-details/:movieImdbid/delete", async (req, res)=>{
     console.log("Botão clicado")
     const userDetail = req.session.currentUser
@@ -303,6 +305,27 @@ router.post("/matches-details/:movieImdbid/delete", async (req, res)=>{
     res.redirect(`/login`);
     // favorites/${userDetail._id}
 })
+
+
+
+
+
+router.get("/feeling-lucky", requireLogin, async (req, res)=>{
+    const userDetail = await User.findById(req.session.currentUser._id);
+    const arrayFavDate = []
+    if (userDetail.date){
+        const dateDetail = await User.findOne({username: userDetail.date})
+        if (dateDetail.favorites){
+            for (let i = 0; i<dateDetail.favorites.length;i++){
+                const dateMoviesArray =  await imdb.get({id: dateDetail.favorites[i]}, {apiKey: process.env.imdbKey, timeout: 30000})
+                arrayFavDate.push(dateMoviesArray)
+            }
+            res.render("movie/feeling-lucky", {arrayFavDate, userDetail})
+        }
+    }
+    res.render("movie/feeling-lucky", {userDetail})
+})
+
 
 
 module.exports = router;

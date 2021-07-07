@@ -110,6 +110,11 @@
   color: #cb1110;
   font-size: 27px;
   font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 
 .clean-a2:hover{
