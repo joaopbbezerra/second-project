@@ -334,8 +334,12 @@ router.get("/feeling-lucky-details/:imdbId", requireLogin, async (req, res)=>{
     console.log("Id movieeeeeee", idMovie)
     const movieDetails =  await imdb.get({id: idMovie}, {apiKey: process.env.imdbKey, timeout: 30000})
     console.log("Movie detailsssss", movieDetails)
-    let testMatch = true
-    //test match!
+    let testMatch = false
+    for (let i = 0; i<userDetail.favorites.length; i++){
+        if (req.params.imdbId == userDetail.favorites[i]){
+            testMatch = true
+        }
+    }
     console.log("CADE MEU MATCHHHHHHH")
     if (testMatch){
         console.log("TESTOU MATCH")
@@ -392,9 +396,19 @@ router.post("/feeling-lucky-details/:imdbId/fav", requireLogin, async (req, res)
                     await User.findByIdAndUpdate(req.session.currentUser._id, {
                         $push: {matches: req.params.imdbId}
                     })
+                    //Retirar o fav do User
+                    await User.findByIdAndUpdate(req.session.currentUser._id, {
+                        $pull: {favorites: req.params.imdbId}
+                    })
+                    //Retirar o fav do Date
                     await User.findOneAndUpdate({username: userNow.date}, {
                         $push: {matches: req.params.imdbId}
                     })
+                    //Retirar o fav do Date
+                    await User.findOneAndUpdate({username: userNow.date}, {
+                        $pull: {favorites: req.params.imdbId}
+                    })
+
                 }
             }
         }
@@ -413,11 +427,27 @@ router.post("/feeling-lucky-details/:imdbId/fav", requireLogin, async (req, res)
     res.render("movie/feeling-lucky-details")
 })
 
+//rota intermediária
+
+
+
 
 //delete route
 router.post("/feeling-lucky-details/:imdbId/del", requireLogin, async (req, res)=>{
-
-
+    const userDetail = await User.findById(req.session.currentUser._id);
+    const dateDetail = await User.findOne({username: userDetail.date})
+    let idMovie = req.params.imdbId
+    console.log("POST Id movieeeeeee", idMovie)
+    let findNewIndex = dateDetail.favorites.indexOf(idMovie)
+    let nextIndex = findNewIndex
+    
+    if (findNewIndex < dateDetail.favorites.length -1){
+        nextIndex++
+        let nextMovie = dateDetail.favorites[nextIndex]
+        res.redirect(`/feeling-lucky-details/${nextMovie}`)
+    } else {
+        res.redirect("/")
+    }
 
 })
 module.exports = router;
