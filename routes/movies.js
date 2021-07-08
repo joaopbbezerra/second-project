@@ -399,6 +399,7 @@ router.post("/feeling-lucky-details/:imdbId/fav", requireLogin, async (req, res)
     if (findNewIndex < dateDetail.favorites.length -1){
         nextIndex++
         let nextMovie = dateDetail.favorites[nextIndex]
+    
         res.redirect(`/feeling-lucky-details/${nextMovie}`)
     } else {
         res.redirect("/")
