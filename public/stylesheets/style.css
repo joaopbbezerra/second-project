@@ -1221,3 +1221,8 @@ Tinder Template by Miami
 .push-red-box{
   margin-top: 4px !important;
 }
+
+.error-msg-lucky{
+  color: white;
+  width: 50%;
+}

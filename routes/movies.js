@@ -290,10 +290,10 @@ try{
             res.redirect("/")
         }
     }
-    res.redirect("/")
+    res.redirect("/feeling-error")
 } catch (e){
     const userDetail = await User.findById(req.session.currentUser._id);
-    res.redirect(`/favorites/${userDetail._id}`)
+    res.redirect(`/feeling-error`)
     console.log(e)
     }
    
@@ -324,7 +324,7 @@ router.get("/feeling-lucky-details/:imdbId", requireLogin, async (req, res)=>{
         }
     } catch(e){
         const userDetail = await User.findById(req.session.currentUser._id);
-        res.redirect(`/favorites/${userDetail._id}`)
+        res.redirect(`/feeling-error`)
         console.log(e)
     }
 
@@ -433,4 +433,15 @@ router.post("/feeling-lucky-details/:imdbId/del", requireLogin, async (req, res)
     }
 
 })
+
+
+
+router.get("/feeling-error", async (req, res)=>{
+
+    res.render("movie/error-feeling-lucky", {errorMsg: "You wans't lucky this time! Maybe you don't assign a person or this person doesn't have more movies for you."})
+})
+
+
+
+
 module.exports = router;

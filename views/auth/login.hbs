@@ -104,6 +104,9 @@
                     window.onload = function(){
                         const button = document.getElementById('check');
                         button.click()
+                        setTimeout(()=>{
+                            button.close()
+                        }, 1500)
                     }
                     </script>
                 {{/if}}
