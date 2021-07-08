@@ -16,7 +16,7 @@ function requireLogin(req, res, next){
 }
 
 router.get("/signup", (req, res)=>{
-    res.render("auth/signup")
+    res.redirect("/auth/login")
 })
 
 router.post("/signup", fileUpload.single("image"), async (req, res)=>{

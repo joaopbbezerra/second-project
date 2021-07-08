@@ -84,7 +84,7 @@
                   {{/if}} --}}
 
                 {{#if errorMessage}}
-                <div class="container">
+                <div class="container" id="popup">
                     <input type="checkbox" id="check">
                     <label class="show_button" id="check" for="check">Click Me</label>
                     <div class="background"></div>
@@ -104,9 +104,9 @@
                     window.onload = function(){
                         const button = document.getElementById('check');
                         button.click()
-                        setTimeout(()=>{
-                            button.close()
-                        }, 1500)
+                    }
+                    document.querySelector('.push-red-box').onclick = () => {
+                        document.querySelector('#popup').style.display = 'none';
                     }
                     </script>
                 {{/if}}
