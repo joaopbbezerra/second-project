@@ -1165,3 +1165,43 @@ Tinder Template by Miami
 .btns label:last-child:hover{
   background: #d9210d;
 }
+
+
+.file {
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  position: absolute;
+  z-index: 9999999;
+}
+
+
+.file-input label {
+  display: block;
+  position: relative;
+  width: 200px;
+  height: 50px;
+  border-radius: 25px;
+  background: -webkit-linear-gradient(right, #bb1919, #fa4242, #b12d2d, #fa4242);
+  transition: all 0.6s cubic-bezier(0.68,-0.55,0.265,1.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  /* transition: all 0.4s ease; */
+  font-family: 'Poppins',sans-serif !important;
+} 
+
+.file-input label:hover{
+  background: -webkit-linear-gradient(right, #b12d2d, #fa4242);
+  
+}
+
+.profile-pict{
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: -20px;
+}
