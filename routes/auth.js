@@ -31,6 +31,15 @@ router.post("/signup", fileUpload.single("image"), async (req, res)=>{
         return;
       }
 
+        //Check for password strength
+    // let myRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,12}/;
+    // if (myRegex.test(password) === false) {
+    //     res.render("auth/login", {
+    //         errorMessage: "Password is too weak",
+    // });
+    //     return;
+    // }
+
     const user = await User.findOne({ username: username }); //Lembrar de colocar o await sempre que chamar o mongodb
     if (user !== null) {
       res.render("auth/signup", {
