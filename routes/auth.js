@@ -27,7 +27,8 @@ router.post("/signup", fileUpload.single("image"), async (req, res)=>{
     const {username, name, password} = req.body
     
     if (username === "" || password === "") {
-        res.render("auth/signup", { errorMessage: "Fill username and password" });
+        alert("Username or password invalid")
+        res.render("auth/login", { errorMessage: "Fill username and password" });
         return;
       }
 
@@ -42,7 +43,7 @@ router.post("/signup", fileUpload.single("image"), async (req, res)=>{
 
     const user = await User.findOne({ username: username }); //Lembrar de colocar o await sempre que chamar o mongodb
     if (user !== null) {
-      res.render("auth/signup", {
+      res.render("auth/login", {
         errorMessage: `${username} already exists. Pick another one`,
       });
       return;
@@ -53,7 +54,7 @@ router.post("/signup", fileUpload.single("image"), async (req, res)=>{
     const hashedPassword = bcrypt.hashSync(password, salt);
     await User.create({username, name, image:fileUrlOnCloudinary, password:hashedPassword})
 
-    res.redirect("/")
+    res.redirect("/auth/login")
 })
 
 router.get("/login", (req, res) => {

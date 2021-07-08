@@ -74,8 +74,43 @@
                     <label for="file">Profile Picture</label>
                   </div>
                   {{!-- {{#if errorMessage}}
-                  <div>{{errorMessage}}</div>
+                  <script>
+                      function alertMsg (){
+                          alert("Username or password invalid or already in use, please try again")
+                      }
+                      alertMsg()
+                  </script>
+                  
                   {{/if}} --}}
+
+                {{#if errorMessage}}
+                <div class="container">
+                    <input type="checkbox" id="check">
+                    <label class="show_button" id="check" for="check">Click Me</label>
+                    <div class="background"></div>
+                    <div class="alert_box new-alert-box">
+                        <div class="icon grey-icon">
+                            <i class="far fa-heart"></i>
+                        </div>
+                        <p>Your username or password is invalid, please try again</p>
+                        <div class="btns push-red-box">
+                        <label for="check ">I will try again!</label>
+                        </div>
+                    </div>
+                    </div>
+
+                    
+                    <script>
+                    window.onload = function(){
+                        const button = document.getElementById('check');
+                        button.click()
+                    }
+                    </script>
+                {{/if}}
+
+
+
+
                   <!-- <div class="field">
                      <input type="password" placeholder="Confirm password" required>
                   </div> -->
