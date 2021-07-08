@@ -438,7 +438,7 @@ router.post("/feeling-lucky-details/:imdbId/del", requireLogin, async (req, res)
 
 router.get("/feeling-error", async (req, res)=>{
 
-    res.render("movie/error-feeling-lucky", {errorMsg: "You wans't lucky this time! Maybe you don't assign a person or this person doesn't have more movies for you."})
+    res.render("movie/error-feeling-lucky", {errorMsg: "You weren't lucky this time! Maybe you don't assign a person or this person doesn't have more movies for you."})
 })
 
 
