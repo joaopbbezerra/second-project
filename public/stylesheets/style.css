@@ -455,7 +455,7 @@ html, body {
 }
 .movie_card .info_section {
   position: relative;
-  width: 50%;
+  width: 30%;
   height: 100%;
   background-blend-mode: multiply;
   z-index: 2;
