@@ -20,15 +20,15 @@
 }
 
 .logo-button{
-  width: 65px !important;
-  margin-top: -101px;
+  width: 55px !important;
+  margin-top: -90px;
   position: relative;
   margin-left: 33px;
 
 }
 
 .del-button{
-  width: 80px;
+  width: 60px !important;
   margin-top: 95px;
   position: relative;
   margin-top: -10px !important;
@@ -36,7 +36,7 @@
 }
 
 .fixing-buttons{
-  margin-left: -50px !important;
+  margin-left: -36px !important;
   margin-top: -12px !important
 }
 
@@ -188,7 +188,7 @@
 	color: #fff;
 }
 .navbar-light .navbar-nav .nav-link {
-	color: #cb1110 !important;
+	color: #fff !important;
 }
 .navbar-light .navbar-nav .nav-link:hover {
 	color: rgb(201, 67, 67) !important;
@@ -445,7 +445,7 @@ html, body {
 
 .movie_card-details {
 
-  height: 700px !important;
+  height: 600px !important;
 
 }
 
@@ -481,7 +481,7 @@ html, body {
 }
 
 .title-details{
-  margin-top: 400px !important;
+  margin-top: 300px !important;
   font-size:25px !important;
   margin-left: 23px;
 }
