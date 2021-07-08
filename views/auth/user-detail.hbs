@@ -21,7 +21,7 @@
                     </form>
                     <form action="/auth/{{userDetail._id}}" method="POST">
     <label class="color-white" for=""></label>
-    <input class="search-btn-radius" type="text" name="date" value={{userDetail.date}}>
+    <input class="search-btn-radius" type="text" name="date" placeholder="Your date" value={{userDetail.date}}>
     <button class="btn color-white" type="submit">Date</button>
                     </form>
                     {{#if errorMessage}}

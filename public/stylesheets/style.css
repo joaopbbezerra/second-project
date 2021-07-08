@@ -804,13 +804,17 @@ html, body {
  
 .search-btn-radius{
   background-color: #f4dfdf;
-  width: 135px;
+  width: 121px;
   padding: 3px;
   border-radius: 15px;
   font-size: 12px;
   font-weight: 600;
   color: #000000;
   margin: 16px auto 10px auto;
+  text-align:center;
+  border: 1px solid black;
+  height: 30px;
+  margin-left: -4px !important;
 }
 
 .to-top{
