@@ -2,7 +2,7 @@
 ## Hi, welcome to Matchflix!
 
   
-Here you will be able to see our code and feel free to use it 
+Here you will be able to see our code and feel free to use it! 
 We used this technologies:
 
 <div  style="display: inline_block"><br>
