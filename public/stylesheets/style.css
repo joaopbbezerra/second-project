@@ -61,6 +61,9 @@
   margin-left: 300px;
 }
 
+.new-fav{
+  margin-top: -10px;
+}
 
 .del-button{
   border: 0px;
@@ -447,6 +450,12 @@ html, body {
 
   height: 600px !important;
 
+}
+
+.z-heart{
+  z-index: 2;
+  margin-bottom: 32px !important;
+  margin-left: 39px !important;
 }
 
 .movie_card:hover {

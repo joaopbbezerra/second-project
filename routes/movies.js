@@ -27,7 +27,42 @@ router.get("/movies-search", async (req, res)=>{
     const {title} = req.query
     const searchResult = await imdb.search({name: title}, {apiKey: process.env.imdbKey, timeout: 30000})
     console.log("Entrou",searchResult.year)
-    res.render("movie/movies-search", {searchResult})
+    const movieDetails =  await imdb.get({id: req.params.movieImdbid}, {apiKey: process.env.imdbKey, timeout: 30000})
+    const userDetail = await User.findById(req.session.currentUser._id);
+    let userOneDate = await User.findOne({username: userDetail.date})
+    let testMatch = false
+    let testToDelete = false
+    let greyFav = false
+    if (userDetail && userDetail.favorites){
+        for (let i = 0; i<userDetail.favorites.length; i++){
+            console.log("Favorites: ", userDetail.favorites[i])
+            console.log("Req params: ", req.params.movieImdbid)
+            if (userDetail.favorites[i] === req.params.movieImdbid){
+                testToDelete = true
+                greyFav = true
+            }
+        }
+    }
+    for (let i = 0; i<userOneDate.favorites.length; i++){
+        if (movieDetails.imdbid === userOneDate.favorites[i]){
+            testMatch = true
+        }
+    }
+    console.log("Test Delete Button: ", testToDelete)
+    // res.render("albums", {albums: albumResult.body.items})
+    // console.log(movieDetails)
+
+    if (testToDelete){
+        if (testMatch){
+            console.log("Entrou no test")
+            res.render("movie/movies-search", {searchResult, movieDetails, testToDelete, greyFav, userDetail, testMatch})
+        } else{
+            res.render("movie/movies-search", {searchResult, movieDetails, testToDelete, greyFav, userDetail, testMatch})
+        }
+    }
+    else {
+        res.render("movie/movies-details", {searchResult, movieDetails, userDetail})
+    }
 })
 
 router.post("/movies-search", async (req, res)=>{

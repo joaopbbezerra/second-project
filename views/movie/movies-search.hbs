@@ -9,6 +9,26 @@
         <h1><a class="clean-a2" href="/movies-details/{{imdbid}}">{{title}}</a></h1>
         <h4>{{year}}</h4>
       </div>
+                  {{#if testToDelete}}
+            <form action="/favorites-details/{{imdbid}}/delete" method="POST">
+                <button class="del-button" type="submit"><img class="del-button fixing-buttons z-heart" src="/images/waste.png" alt="saas"></button>
+            </form>
+            {{else}}
+            <form action="/favorites-details/{{imdbid}}/delete" method="POST">
+                <button class="del-button" type="submit"><img class="del-button fixing-buttons z-heart" src="" alt=""></button>
+            </form>
+            {{/if}}
+        </div>
+        <div>
+            {{#if greyFav}}
+            <form action="/favorites/{{imdbid}}/add" method="POST">
+                <button class="fav-button new-fav" type="submit"><img class="logo-button fixing-heart z-heart" src="/images/heart1-grey.png" alt="saas"></button>
+            </form>
+            {{else}}
+            <form action="/favorites/{{imdbid}}/add" method="POST">
+                <button class="fav-button new-fav" type="submit"><img class="logo-button fixing-heart coloured-heart z-heart" src="/images/heart1.png" alt="saas"></button>
+            </form>
+            {{/if}}
       <div class="movie_desc">
       </div>
       <div class="movie_social">
@@ -22,5 +42,33 @@
 {{/each}}
 </div>
 
+{{/if}}
+
+
+
+{{#if testMatch}}
+<div class="container">
+      <input type="checkbox" id="check">
+      <label class="show_button" id="check" for="check">Click Me</label>
+      <div class="background"></div>
+      <div class="alert_box">
+        <div class="icon">
+            <i class="far fa-heart"></i>
+        </div>
+        <header>Yes!</header>
+        <p>You have a Matchflix!</p>
+        <div class="btns">
+          <label for="check">Continue</label>
+        </div>
+      </div>
+    </div>
+
+    
+    <script>
+    window.onload = function(){
+        const button = document.getElementById('check');
+        button.click()
+    }
+    </script>
 {{/if}}
 
